@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Free Bootstrap Admin Template : Binary Admin</title>
+	<!-- BOOTSTRAP STYLES-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+     <!-- FONTAWESOME STYLES-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+     <!-- MORRIS CHART STYLES-->
+   
+        <!-- CUSTOM STYLES-->
+    <link href="assets/css/custom.css" rel="stylesheet" />
+     <!-- GOOGLE FONTS-->
+   
+     <!-- TABLE STYLES-->
+    <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    
+    
+    <!--dynamic table-->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/bootstrap-table.css" />
+  <link href="js/advanced-datatable/css/demo_page.css" rel="stylesheet" />
+  <link href="js/advanced-datatable/css/demo_table.css" rel="stylesheet" />
+  <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css" />
+   <link rel="stylesheet" href="css/fileinput.css"	type="text/css">
+</head>
+<body>
+
+    <div id="wrapper">
+        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Binary admin</a> 
+            </div>
+  <div style="color: white;
+padding: 15px 50px 5px 50px;
+float: right;
+font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a id="logout" class="btn btn-danger square-btn-adjust">Logout</a> </div>
+        </nav>   
+           <!-- /. NAV TOP  -->
+                <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+				<li class="text-center">
+                    <img src="assets/img/find_user.png" class="user-image img-responsive"/>
+					</li>
+				
+					
+                    <li>
+                        <a  href="chart.html"><i class="fa fa-dashboard fa-3x"></i> 首页</a>
+                    </li>
+                     <li>
+                        <a   href="table.html"><i class="fa fa-desktop fa-3x"></i> 用户管理</a>
+                    </li>
+                    <li>
+                        <a  class="active-menu" href="travel_management.html"><i class="fa fa-qrcode fa-3x"></i> 景点管理</a>
+                    </li>
+						   <li  >
+                        <a   href="comment_management.html"><i class="fa fa-bar-chart-o fa-3x"></i> 评论管理</a>
+                    </li>	
+                      <li  >
+                        <a  href="order_management.html"><i class="fa fa-table fa-3x"></i> 订单管理</a>
+                    </li>
+                    <li  >
+                        <a  href="liuyan.html"><i class="fa fa-edit fa-3x"></i> 留言管理 </a>
+                    </li>				
+					 <li  >
+                        <a   href="admLogin.html"><i class="fa fa-bolt fa-3x"></i> Login</a>
+                    </li>	
+                     <li  >
+                        <a   href="admRegister.html"><i class="fa fa-laptop fa-3x"></i> Registeration</a>
+                    </li>	
+					                   
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap fa-3x"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">Second Level Link</a>
+                            </li>
+                            <li>
+                                <a href="#">Second Level Link</a>
+                            </li>
+                            <li>
+                                <a href="#">Second Level Link<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="#">Third Level Link</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Third Level Link</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Third Level Link</a>
+                                    </li>
+
+                                </ul>
+                               
+                            </li>
+                        </ul>
+                      </li>  
+                  <li  >
+                        <a   href="blank.html"><i class="fa fa-square-o fa-3x"></i> Blank Page</a>
+                    </li>	
+                </ul>
+               
+            </div>
+            
+        </nav>  
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                     <h2>旅游景点管理</h2>   
+                        <h5>Welcome Jhon Deo , Love to see you back. </h5>
+                       
+                    </div>
+                </div>
+                 <!-- /. ROW  -->
+                 <hr />
+               
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                             Advanced Tables
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                            <a class="btn btn-primary" data-toggle="modal" href="#myModal2">
+                                Add New
+                            </a>
+							<!---->
+							 <!-- Modal -->
+                            <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title">Datepicker in Modal</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                          <!--    <form action="#" class="form-horizontal "> -->
+                                            
+                                            <form id="formFile" action="placet/uploadFile.action" method="post" enctype="multipart/form-data">
+                                               
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">旅游地点名称</label>
+                                                    <input type="text" class="text" value="Place Name"  id="pname" name="pname" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}" >
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">地点</label>
+                                                      <input type="text value="Position"  id="position"  name="position" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Position';}">  
+                                                </div>
+                                                
+                                          <!--        <div class="form-group">
+                                                    <label class="control-label col-md-4">照片</label>
+                                                    <input type="text" class="text" value="Photo"  id="photo" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Photo';}" >
+                                                </div>-->
+                                                
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">类型</label>
+                                                    <input type="text" class="text" value="type"  id="type" name="type" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type';}" >
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">折扣信息</label>
+                                                    <input type="text" class="text" value="discount"  id="discount" name="discount" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'discount';}" >
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">费用明细</label>
+                                                    <input type="text" class="text" value="costSource"  id="costSource" name="costSource" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'costSource';}" >
+                                                </div>
+                             
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">满意度</label>
+                                                    <input type="text" class="text" value="Satisfaction"  id="satisfaction"  name="satisfaction" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Satisfaction';}" >
+                                                </div>
+   
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">成人花费</label>
+                                                    <input type="text" class="text" value="Cost"  id="cost" name="cost" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'cost';}" >
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">儿童花费</label>
+                                                    <input type="text" class="text" value="childcost"  id="childcost" name="childcost" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'childcost';}" >
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">出发时间</label>
+                                                    <input type="text" class="text" value="startDate"  id="startDate" name="startDate" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'startDate';}" >
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">返程时间</label>
+                                                    <input type="text" class="text" value="endDate"  id="endDate" name="endDate" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'endDate';}" >
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">推荐游玩时间</label>
+                                                    <input type="text" class="text" value="Time"  id="time" name="time" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Time';}" >
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">标题</label>
+                                                    <input type="text" class="text" value="title"  id="title" name="title" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'title';}" >
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">景点介绍</label>
+                                                    <input type="text" class="text" value="description"  id="description" name="description" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'description';}" >
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">出发城市</label>
+                                                    <input type="text" class="text" value="startPlace"  id="startPlace" name="startPlace" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'startPlace';}" >
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">相对位置X坐标</label>
+                                                    <input type="text" class="text" value="px"  id="px" name="px" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'px';}" >
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">相对位置Y坐标</label>
+                                                    <input type="text" class="text" value="py"  id="py" name="py" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'py';}" >
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">推荐住宿</label>
+                                                    <input type="text" class="text" value="hotel"  id="hotel" name="hotel" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'hotel';}" >
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">推荐用餐地点</label>
+                                                    <input type="text" class="text" value="lunch"  id="lunch" name="lunch" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'lunch';}" >
+                                                </div>
+                                                
+                                                <div class="form-group">
+														<span id="message"></span>
+														<input id="file-0" class="file"	type="file" name="file" title="图片" multiple data-min-file-count="1"> <br>
+														<button type="button" id="btns" data-dismiss="modal" class="btn btn-primary">上传</button>
+														<button type="reset" class="btn btn-default">清空输入信息</button>
+												</div>
+                                                
+                                            </form>
+                                        </div>
+                                      <!--  
+                                        <div class="modal-footer">
+                                            <button id = "addplace" data-dismiss="modal" class="btn btn-primary" type="button">添加</button>
+                                        </div>
+                                       --> 
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- modal -->
+							<!---->
+        
+        
+     <table  
+		id="dynamic-table1"
+	   data-url="placet/searchPlace.action"  
+       data-page-list="[5, 10, 15]"
+       data-toggle="table"
+       data-search="true"    
+       data-show-toggle="true"
+ 	   data-show-export="true"
+       data-pagination="true" 
+	   data-click-to-select="true"	
+	   data-show-columns="true"
+       data-side-pagination="client">
+        <thead>
+        <!-- {"name":"peter","id":1,"pwd":"122"} -->
+        <tr>
+            <th data-field="id">Id</th>
+            <th data-field="photo">景点图片</th>
+            <th data-field="name">景点名称</th>
+            <th data-field="position">地点</th>
+            <th data-field="type">类型</th>
+            <th data-field="discount">优惠信息</th>
+             <th data-field="satisfaction">满意度</th>
+             <th data-field="cost">花费</th>
+             <th data-field="childcost">儿童花费</th>
+             <th data-field="startDate">出发时间</th>
+             <th data-field="endDate">返程时间</th>
+             <th data-field="time">推荐游玩时间</th>
+             <th data-field="title">title</th>
+             <th data-field="description">景点介绍</th>
+             <th data-field="startPlace">出发城市</th>
+             <th data-field="px">相对位置X坐标</th>
+             <th data-field="py">相对位置Y坐标</th>
+             <th data-field="hotel">最近的旅馆</th>
+             <th data-field="lunch">最近的餐厅</th>
+             
+             
+      
+            <th data-field="edit" class="hidden-phone">
+           Edit
+            </th>
+            <th data-field="del" class="hidden-phone">Delete</th>
+        </tr>
+        </thead>
+       
+        </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!--End Advanced Tables -->
+                </div>
+            </div>
+                <!-- /. ROW  -->
+            <div class="row">
+                <div class="col-md-6">
+                  <!--   Kitchen Sink -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Kitchen Sink
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Username</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- End  Kitchen Sink -->
+                </div>
+                <div class="col-md-6">
+                     <!--   Basic Table  -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Basic Table
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Username</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                      <!-- End  Basic Table  -->
+                </div>
+            </div>
+                <!-- /. ROW  -->
+            <div class="row">
+                <div class="col-md-6">
+                      <!--    Striped Rows Table  -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Striped Rows Table
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Username</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  End  Striped Rows Table  -->
+                </div>
+                <div class="col-md-6">
+                    <!--    Bordered Table  -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Bordered Table
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive table-bordered">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Username</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                     <!--  End  Bordered Table  -->
+                </div>
+            </div>
+                <!-- /. ROW  -->
+            <div class="row">
+                <div class="col-md-6">
+                     <!--    Hover Rows  -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Hover Rows
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Username</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End  Hover Rows  -->
+                </div>
+                <div class="col-md-6">
+                     <!--    Context Classes  -->
+                    <div class="panel panel-default">
+                       
+                        <div class="panel-heading">
+                            Context Classes
+                        </div>
+                        
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Username</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="success">
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr class="info">
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr class="warning">
+                                            <td>3</td>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                        <tr class="danger">
+                                            <td>4</td>
+                                            <td>John</td>
+                                            <td>Smith</td>
+                                            <td>@jsmith</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  end  Context Classes  -->
+                </div>
+            </div>
+                <!-- /. ROW  -->
+        </div>
+               
+    </div>
+             <!-- /. PAGE INNER  -->
+            </div>
+         <!-- /. PAGE WRAPPER  -->
+     <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    
+    
+    
+    
+ <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/modernizr.min.js"></script>
+<script src="js/jquery.nicescroll.js"></script>
+
+
+<script src="js/tableExport.js"></script>
+    
+    
+    
+    
+    <script src="assets/js/jquery-1.10.2.js"></script>
+    
+    <script type="text/javascript" src="js/browser.js"></script>
+    <script type="text/javascript" src="js/fileinput.js"></script>
+	<script type="text/javascript" src="js/fileinput_locale_zh.js"></script>
+	<script src="js/jquery.form.js" type="text/javascript"></script>
+	<script src="js/fileload.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/bootstrap-fileupload.js"></script>
+      <!-- BOOTSTRAP SCRIPTS -->
+      
+      
+      
+      
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+     <!-- DATA TABLE SCRIPTS -->
+    <script src="assets/js/dataTables/jquery.dataTables.js"></script>
+    
+    <!--dynamic table-->
+<script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
+<script src="js/bootstrap-table.js"></script>  
+<script src="js/bootstrap-table-export.js"></script>
+<script src="js/bootstrap-table-zh-CN.js"></script>
+<!--dynamic table initialization -->
+<script src="js/dynamic_table_init.js"></script>
+
+    <script>
+            $(document).ready(function () {
+            	
+            	
+            	function getUrlParam(name) {
+          		  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+          		  var r = window.location.search.substr(1).match(reg); //匹配目标参数
+          		  if (r != null) return unescape(r[2]); return null; //返回参数值
+          	}
+            	var msg = getUrlParam("msg");
+            	if(msg=="success"){
+            		$('#dynamic-table1').bootstrapTable('refresh');
+            	}
+            
+            <!--
+            	$("#addplace").click(function(){ 
+                	$.ajax({
+            			url:"placet/addplace.action",
+            			method: "POST",
+            			data: {  "pname":$("#pname").val(),
+            				     "position":$("#position").val(),
+            				     "photo":$("#photo").val(),
+            				     "satisfaction":$("#satisfaction").val(),
+            				     "time":$("#time").val(),
+            				     "childcost":$("#childcost").val(),
+            				     "startDate":$("#startDate").val(),
+            				     "endDate":$("#endDate").val(),
+            				     "title":$("#title").val(),
+            				     "description":$("#description").val(),
+            				     "startPlace":$("#startPlace").val(),
+            				     "type":$("#type").val(),
+            				     "discount":$("#discount").val(),
+            				     "costSource":$("#costSource").val(),
+            				     "cost":$("#cost").val()},
+            				     
+            			dataType: "text",
+            			success:function(data){
+            				alert('ss  '+data);
+            				if(data=="\"ok\""){
+            					alert("Successed registered!");
+            					$("#dynamic-table1").bootstrapTable('refresh');
+            				}else{
+            					alert("Failed!");
+            				}
+            			},
+            			error:function(){
+            				alert("error!");
+            			}
+            		}); 
+                });
+            	-->
+            
+            	$("#btns").click(function(){
+        			//封装id为formFile的form表单内的所有input表单的value
+        			var formData = new FormData($("#formFile")[0]);  	
+        			$("#formFile").ajaxSubmit({
+        			    url: "placet/uploadFile.action",    //请求的url地址	
+        			    type: 'POST',  
+        			    data: formData, 
+        		        ///cache: false,  
+        		        //contentType: false,//"multipart/form-data"  
+        		        //processData: false,  
+        			    dataType: "text", 
+        			   	success:function(data) {	
+        			   		//alert("d "+data);
+        			   		if(data.indexOf("success")!=-1){
+        			   			//alert("添加logo ok");		
+        			   			$("#dynamic-table1").bootstrapTable('refresh');
+        			   			//location.replace("grades.html");
+        			   		}else{
+        			   			alert("添加失败");
+        			   		}
+        			    },		   
+        			    error:function() {
+        			        //请求出错处理
+        			        alert("运行异常l");
+        			    }
+        			});	
+        		});
+
+                
+ 
+            	
+                $(document).on('click','#edit',function(){
+           		 //alert(345);
+           		 //获取动态title属性的值
+           		 var pid=$(this).attr("title");
+           		// alert("uid : "+uid);	 
+           location.href="http://localhost:8080/abc/update_place.html?pid="+pid;
+           	});
+                
+                $(document).on('click','#remove',function(){
+           		// $("#remove").click(function(){
+           		 //获取动态title属性的值
+           		 var pid=$(this).attr("title");
+           		 $.ajax({
+           				url:"placet/delete.action",
+           				method: "POST",
+           				data: {"id":pid},	     
+           				dataType: "text",
+           				success:function(data){
+           					//alert(data);
+           					if(data=="\"ok\""){
+           						//alert("Successed delete!"); 
+           						$("#dynamic-table1").bootstrapTable('refresh');
+           					}else{
+           						alert("Failed!");
+           					}
+           				},
+           				error:function(){
+           					alert("error!");
+           				}
+           			}); 
+           	});  
+                $("#logout").on('click', function(c){
+            		localStorage.removeItem("aname");	
+            		location.href="http://localhost:8080/abc/admLogin.html";
+            	});
+            });  
+    </script>
+         <!-- CUSTOM SCRIPTS -->
+    
+
+</body>
+</html>

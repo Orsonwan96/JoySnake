@@ -1,0 +1,558 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Home</title>
+<link href="index/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="index/js/jquery-1.11.0.min.js"></script>
+<!-- Custom Theme files -->
+<link href="index/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="index/css/style1.css" rel="stylesheet" type="text/css" media="all" />	
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--Google Fonts-->
+<!--  <link href='http://fonts.useso.com/css?family=Lato:400,300,700,900' rel='stylesheet' type='text/css'>-->
+<!-- //end-smoth-scrolling -->
+<script src="index/js/responsiveslides.min.js"></script>
+<script>
+    // You can also use "$(window).load(function() {"
+    $(function () {
+      $("#slider2").responsiveSlides({
+        auto: true,
+        pager: true,
+        speed: 300,
+        namespace: "callbacks",
+      });
+    });
+  </script>
+
+
+<!-- requried-jsfiles-for owl -->
+		<link href="index/css/owl.carousel.css" rel="stylesheet">
+		<script src="index/js/owl.carousel.js"></script>
+			<script>
+				$(document).ready(function() {
+					$("#owl-demo").owlCarousel({
+						items : 3,
+						lazyLoad : true,
+						autoPlay : false,
+						pagination : true,
+					});
+				});
+			</script>
+		<!-- //requried-jsfiles-for owl -->
+<!-- animated-css -->
+		<link href="index/css/animate.css" rel="stylesheet" type="text/css" media="all">
+		<script src="index/js/wow.min.js"></script>
+		<script>
+		 new WOW().init();
+		</script>
+<!-- animated-css -->
+
+
+ <script>
+    $(document).ready(function(c) {
+    	var str= window.localStorage?localStorage.getItem("userid"):Cookie.read("userid");
+    	//var strname= window.localStorage?localStorage.getItem("username"):Cookie.read("username");
+    	//alert(str);
+    	if (str!=null){
+    	$.ajax({
+			url:"usert/userEntity.action",
+			method: "POST",
+			data: {"uid":str},
+			dataType: "json",
+			success:function(data){
+				var strname=data.name;
+				    $(".ban-btn").hide();
+				    $("#zhuxiao").show();
+		    		$(".huanyin").show();
+		    		$(".huanyin").text("欢迎！"+strname);
+		    		$("#xiugai").hide();
+		    		$("#person").show();
+			},
+			error:function(){
+				alert("error!");
+			}
+		}); }
+    	else{
+    		
+    		$("#person").hide();
+    		$(".huanyin").hide();
+			  $("#zhuxiao").hide();
+    	}
+    	
+    	$("#zhuxiao").on('click', function(c){
+    		localStorage.removeItem("userid");	
+    		location.href="http://localhost:8080/abc/index.html";
+    	});
+    	
+
+        $.ajax({
+ 		  url: "placet/SelectThreePlace.action",    //请求的url地址，获取全部roles职务的名称
+ 	      dataType: "json",   //返回的异步数据格式为不能json，是文本格式
+ 	      type: "post",   //请求方式，默认post	
+ 	   	 success:function(data) {	
+ 	   		$("#visit1").attr('src', data[0].src);
+ 	      	$("#visit2").attr('src', data[1].src);
+ 	        $("#visit3").attr('src', data[2].src);
+ 	        $("#pname1").text(data[0].pname);
+ 	        $("#pname2").text(data[1].pname);
+ 	        $("#pname3").text(data[2].pname);
+ 	        $("#description1").text(data[0].description);
+ 	        $("#description2").text(data[1].description);
+ 	        $("#description3").text(data[2].description);
+ 	       
+ 	    },		   
+ 	    error:function() {
+ 	        //请求出错处理
+ 	        alert("运行异常a");
+ 	    }
+ 	}); 
+        
+        $.ajax({
+     	   url:"usert/searchTopFiveUser.action",	
+     	   method:"POST",
+     	   dataType:"json",
+     	   success:function(data){
+     		   $("#uname1").html(data[0].uname);
+     		   $("#icon1").attr("src",data[0].icon);
+     		   $("#uname2").html(data[1].uname);
+     		   $("#icon2").attr("src",data[1].icon);
+     		   $("#uname3").html(data[2].uname);
+     		   $("#icon3").attr("src",data[2].icon);
+     		   $("#uname4").html(data[3].uname);
+     		   $("#icon4").attr("src",data[3].icon);
+     		   $("#uname5").html(data[4].uname);
+     		   $("#icon5").attr("src",data[4].icon);
+     	   },
+     	   error:function(){
+ 			alert("error!");
+ 		   }
+     	});
+
+    	
+    });
+ </script>
+
+</head>
+<body>
+<!--header start here-->
+<div class="banner">
+ <div class="header">
+   <div class="container">
+     <div class="header-main">
+	   <div class="logo wow bounceInLeft" data-wow-delay="0.3s">
+	     <a href="index.html"><img src="images/logo1.png"  alt=""></a>
+	   </div>
+	   <div class="top-navg">
+			   <span class="menu"> <img src="images/icon.png" alt=""/></span>	
+			 <nav class="cl-effect-13">				
+				<ul class="res">
+					<li><a class="active" href="index.html">首页</a></li>
+					<li><a href="about.html">关于</a></li>
+					<li><a href="sight.html">景点推荐</a></li>
+					<li><a href="dingzhiyou.html">个性定制</a></li>
+					<li><a href="comment.html">点评区</a></li>
+					<li><a href="contact.html">联系我们</a></li>
+				</ul>
+			</nav>
+			<!-- script-for-menu -->
+				 <script>
+				   $( "span.menu" ).click(function() {
+					 $( "ul.res" ).slideToggle( 300, function() {
+					 // Animation complete.
+					  });
+					 });
+				</script>					
+	   </div>
+	    <div class="clearfix"> </div>
+      </div>
+    </div>
+  </div>
+  <div class="banner-main">
+	    <div class="slider-bann wow bounceInRight" data-wow-delay="0.3s">
+
+	    <ul class="rslides" id="slider2">
+	      <li>
+	      <h3 class="huanyin"></h3>
+	      	<h3>欢迎来到玩蛇</h3> 
+	      	<h4>你将会在这里迷失</h4>
+	      	  <div class="ban-btn">
+	      	   <a href="Login.html" class="hvr-bounce-out">用户登录</a>
+	      	  </div>
+	      	  
+	      </li>
+	      <li>
+	       <h3 class="huanyin"></h3>
+	      	<h3>众里寻他千百度</h3>
+	      	<h4 id="xiugai">蓦然回首</h4>
+	      	  <div class="ban-btn">
+	      	  <a href="Register.html" class="hvr-bounce-out">用户注册</a>
+	      	  </div>
+	      	  <div id="person" class="ban-btn">
+	      	  <a  href="usermessage.html" class="hvr-bounce-out">个人中心</a>
+	      	  </div>
+	      	 
+	      	</li>
+	      <li>
+	        <h3 class="huanyin"></h3>
+	      	<h3>生活即旅游</h3>
+	      	<h4>旅游即玩蛇</h4>
+	      	  <div id="zhuxiao" class="ban-btn">
+	      	   <a class="hvr-bounce-out">用户注销</a>
+	      	  </div>
+	      	
+	      </li>
+	    </ul>
+    </div>
+  </div>
+</div>
+<!--header end here-->
+<!--what we do strat here-->
+<div class="what-we-do">
+ <div class="container">
+    <div class="what-we-do-main  wow bounceInLeft" data-wow-delay="0.3s">
+    	 <h3>我们是您的旅游私人秘书</h3>
+    	 <span class="lft-bar-we"> </span>
+	     <span class="rit-bar-we"> </span>
+    	 <p>在这里，我们将为您提供高质量的旅游项目，如果您觉得我们所提供的旅游项目差强人意，我们可以为您私人订制！</p>
+    	 <a href="about.html" class="hvr-bounce-out">阅读更多</a>
+    	<div class="clearfix"> </div>
+    </div>
+ </div>
+</div>
+<!--what we do end here-->
+<!--peoples strat here-->
+<div class="people">
+	<div class="container">
+		<div class="people-main">
+			  <div class="people-top wow bounceInRight" data-wow-delay="0.3s">
+			  	<h1>旅行达人</h1>
+			  	<span class="lft-bar-team"> </span>
+			  	<span class="rit-bar-team"> </span>
+			  	<p>这些是拥有丰富的旅行经验的旅游者们对我们的评价</p>
+			  </div>
+			  <div class="people-bottom">
+			  	 <div id="owl-demo" class="owl-carousel text-center">
+			  	 	  <div class="item g1">
+							<img style = "width:270px; height:400px" id = "icon1" class="lazyOwl img-responsive"  alt="name" >
+							<div class="people-caption">
+								<h3 id = "uname1">Duis nec congue</h3>
+								<span>Neque porro quisquam est qui dolorem </span>
+								<ul class="people-icons">
+									<li><a href="#"> <span class="fb"></span> </a></li>
+									<li><a href="#"> <span class="tw"></span> </a></li>
+									<li><a href="#"> <span class="google"></span> </a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="item g1">
+							<img style = "width:270px; height:400px"id = "icon2"class="lazyOwl img-responsive"  alt="name">
+							<div class="people-caption">
+								<h3 id = "uname2">Duis nec congue</h3>
+								<span>Neque porro quisquam est qui dolorem </span>
+								<ul class="people-icons">
+									<li><a href="#"> <span class="fb"></span> </a></li>
+									<li><a href="#"> <span class="tw"></span> </a></li>
+									<li><a href="#"> <span class="google"></span> </a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="item g1">
+							<img style = "width:270px; height:400px" id = "icon3"class="lazyOwl img-responsive"  alt="name">
+							<div class="people-caption">
+								<h3 id = "uname3">Duis nec congue</h3>
+								<span>Neque porro quisquam est qui dolorem </span>
+								<ul class="people-icons">
+									<li><a href="#"> <span class="fb"></span> </a></li>
+									<li><a href="#"> <span class="tw"></span> </a></li>
+									<li><a href="#"> <span class="google"></span> </a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="item g1">
+							<img style = "width:270px; height:400px" id = "icon4" class="lazyOwl img-responsive" alt="name">
+							<div class="people-caption">
+								<h3 id = "uname4">Duis nec congue</h3>
+								<span>Neque porro quisquam est qui dolorem </span>
+								<ul class="people-icons">
+									<li><a href="#"> <span class="fb"></span> </a></li>
+									<li><a href="#"> <span class="tw"></span> </a></li>
+									<li><a href="#"> <span class="google"></span> </a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="item g1">
+							<img style = "width:270px; height:400px" id = "icon5" class="lazyOwl img-responsive" alt="name">
+							<div class="people-caption">
+								<h3 id = "uname5">Duis nec congue</h3>
+								<span>Neque porro quisquam est qui dolorem </span>
+								<ul class="people-icons">
+									<li><a href="#"> <span class="fb"></span> </a></li>
+									<li><a href="#"> <span class="tw"></span> </a></li>
+									<li><a href="#"> <span class="google"></span> </a></li>
+								</ul>
+							</div>
+						</div>
+																												
+					</div>
+			  </div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+</div>
+<!--peoples end here--> 
+<!--disk bar strat here-->
+<div class="disk">
+  <div class="container">
+  	<div class="disk-main">
+  		   <div class="col-md-8 disk-left wow bounceInLeft" data-wow-delay="0.3s">
+  		   	  <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</p>
+  		   </div>
+  		   <div class="col-md-4 disk-right wow bounceInRight" data-wow-delay="0.3s">
+  		   	<a href="about.html" class="hvr-bounce-out">Read More</a>
+  		   </div>
+  		<div class="clearfix"> </div>
+  	</div>
+  </div>
+</div>
+<!--disk bar end here-->
+<!--features strat here-->
+<div class="features">
+  <div class="container">
+  	<div class="features-main">
+  		<div class="features-top">
+  			<h3>Features</h3>
+  			<span class="lft-bar-fea"> </span>
+			<span class="rit-bar-fea"> </span>
+  		</div>
+  		<div class="features-bottom">
+	  		 <div class="col-md-6 features-left wow bounceInLeft" data-wow-delay="0.3s">
+	  		   	 <div class="feature-grids">
+		  		   	  <div class="fea-img">
+		  		   	  	<img src="images/fe1.png" alt=""> 
+		  		   	  </div>
+		  		   	  <div class="fea-text">
+		  		   	  	<h4>Nemo enim</h4>
+		  		   	  	<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.</p>
+		  		   	  </div>
+		  		   	<div class="clearfix"> </div>
+	  		   	  </div>
+	  		   	  <div class="feature-grids">
+		  		   	  <div class="fea-img">
+		  		   	  	<img src="images/fe2.png" alt=""> 
+		  		   	  </div>
+		  		   	  <div class="fea-text">
+		  		   	  	<h4>Lorem ipsum</h4>
+		  		   	  	<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.</p>
+		  		   	  </div>
+		  		   	<div class="clearfix"> </div>
+	  		   	  </div>
+	  		   </div>
+	  		   <div class="col-md-6 features-right wow bounceInRight" data-wow-delay="0.3s">
+	  		   	 <div class="feature-grids">
+		  		   	  <div class="fea-img">
+		  		   	  	<img src="images/fe3.png" alt=""> 
+		  		   	  </div>
+		  		   	  <div class="fea-text">
+		  		   	  	<h4>Neque porro</h4>
+		  		   	  	<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.</p>
+		  		   	  </div>
+		  		   	<div class="clearfix"> </div>
+	  		   	  </div>
+	  		   	  <div class="feature-grids">
+		  		   	  <div class="fea-img">
+		  		   	  	<img src="images/fe4.png" alt=""> 
+		  		   	  </div>
+		  		   	  <div class="fea-text">
+		  		   	  	<h4>Duis aute</h4>
+		  		   	  	<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.</p>
+		  		   	  </div>
+		  		   	<div class="clearfix"> </div>
+	  		   	  </div>
+	  		   </div>
+	  		<div class="clearfix"> </div>
+  		</div>
+  	</div>
+  </div>
+</div>
+<!--features end here-->
+<!--visit places strat here-->
+<div class="visit">
+   <div class="container">
+   	<div class="visit-main wow bounceInRight" data-wow-delay="0.3s">
+   		  <div class="visit-top">
+   		  	 <h3>Visit Place</h3>
+			 <span class="lft-bar-visit"> </span>
+			<span class="rit-bar-visit"> </span>
+   		  </div>
+   		  <div class="visit-bottom">
+   		  	 <div class="col-md-4 visit-grid">
+   		  	 	<div class="item-1 item-type-spin">
+								<a class="item-hover swipebox" href="sight.html"  data-title="Vigor">
+										<div class="item-info">
+										<div class="headline">
+											Visit Place
+											<div class="line"></div>
+											<div class="date">February 29, 2016</div>			
+										</div>
+									</div>
+									<div class="mask"></div>
+								</a>
+							<div class="item-img">   <!-- style="width: 283.32px; height: 212.48px; -->
+							<img id="visit1" style="width: 350px; height: 262.48px;" src="images/v1.jpg" class="img-responsive" alt="" />
+							</div>
+				</div>	
+   		  	 	<h4><a id="pname1" href="single.html">Temporibus autem</a></h4>
+   		  	 	<p id="description1">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain.</p>
+   		  	    <div class="visit-blog">
+				   <div class="visit-btn">
+				      <a href="sight.html">Read More</a>
+				   </div>
+				   <div class="visit-likes">
+				    <a href="#"><span class="#">2k</span></a>
+				   </div>
+				  <div class="clearfix"> </div>
+				</div>
+			 </div>
+			 <div class="col-md-4 visit-grid">
+   		  	 	<div class="item-1 item-type-spin">
+								<a class="item-hover swipebox" href="sight.html"  data-title="Vigor">
+										<div class="item-info">
+										<div class="headline">
+											Visit Place
+											<div class="line"></div>
+											<div class="date">February 29, 2016</div>			
+										</div>
+									</div>
+									<div class="mask"></div>
+								</a>
+							<div class="item-img">
+							<img style="width: 350px; height: 262.48px;" id="visit2" src="images/v2.jpg" class="img-responsive" alt="" />
+							</div>
+				</div>	
+   		  	 	<h4><a id="pname2" href="single.html">Pleasure praising</a></h4>
+   		  	 	<p id="description2">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain.</p>
+   		  	    <div class="visit-blog">
+				   <div class="visit-btn">
+				      <a href="sight.html">Read More</a>
+				   </div>
+				   <div class="visit-likes">
+				    <a href="#"><span class="#">2k</span></a>
+				   </div>
+				  <div class="clearfix"> </div>
+				</div>
+			 </div>
+			 <div class="col-md-4 visit-grid">
+   		  	 	<div class="item-1  item-type-spin">
+								<a class="item-hover swipebox" href="sight.html"  data-title="Vigor">
+										<div class="item-info">
+										<div class="headline">
+											Visit Place
+											<div class="line"></div>
+											<div class="date">February 29, 2016</div>			
+										</div>
+									</div>
+									<div class="mask"></div>
+								</a>
+							<div class="item-img">
+							<img style="width: 350px; height: 262.48px;" id="visit3" src="images/v3.jpg" class="img-responsive" alt="" />
+							</div>
+				</div>	
+   		  	 	<h4><a id="pname3" href="single.html">Temporibus autem</a></h4>
+   		  	 	<p id="description3">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain.</p>
+   		  	    <div class="visit-blog">
+				   <div class="visit-btn">
+				      <a href="sight.html">Read More</a>
+				   </div>
+				   <div class="visit-likes">
+				    <a href="#"><span class="#">2k</span></a>
+				   </div>
+				  <div class="clearfix"> </div>
+				</div>
+			 </div>
+			<div class="clearfix"></div>
+   		  </div>
+   		<div class="clearfix"> </div>
+   	</div>
+   </div>
+</div>
+<!--visit places end here-->
+
+<!--footer start here-->
+<div class="map">
+	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d158858.182370726!2d-0.10159865000000001!3d51.52864165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2sLondon%2C+UK!5e0!3m2!1sen!2sin!4v1431577187804"> </iframe>
+  <div class="footer">
+	<div class="container">
+		<div class="footer-main">
+			<div class="col-md-4 ftr-grids wow bounceIn" data-wow-delay="0.4s">
+				<h4>Get in Touch</h4>
+				<ul class="get-touch">
+					<li><span class="share"> </span><a href="#">Tempor incididunt ut labore et dolore </a></li>
+					<li><span class="email"> </span><a href="mailto:info@example.com">example@gmail.com</a> </li>
+					<li><span class="phone"> </span>+613 1544 5578 </li>
+				</ul>
+			</div>
+			<div class="col-md-4 ftr-grids wow bounceIn" data-wow-delay="0.4s">
+				<h4>Follow Us</h4>
+				<ul class="mid-grid">
+					<li><a href="#"><span class="tw"> </span></a></li>
+					<li><a href="#"><span class="gmail"> </span></a> </li>
+					<li><a href="#"><span class="inst"> </span></a> </li>
+					<li><a href="#"><span class="pri"> </span></a> </li>					
+				</ul>
+			</div>
+			<div class="col-md-4 ftr-grids wow bounceIn" data-wow-delay="0.4s">
+				<h4>Popular Posts</h4>
+				<div class="ftr-last">
+				  <div class="ftr-month">
+				     <h6>January</h6>
+				  </div>
+				  <div class="ftr-like">
+				     <h6>3 likes</h6>
+				  </div>
+				  <div class="clearfix"> </div>
+				</div>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed</p>
+				<div class="ftr-last">
+				  <div class="ftr-month">
+				     <h6>February</h6>
+				  </div>
+				  <div class="ftr-like">
+				     <h6>5 likes</h6>
+				  </div>
+				  <div class="clearfix"> </div>
+				</div>
+				<p>Lorem ipsum dolor sit consectetur adipiscing eiusmod tempor</p>
+				<div class="ftr-last">
+				  <div class="ftr-month">
+				     <h6>March</h6>
+				  </div>
+				  <div class="ftr-like">
+				     <h6>2 likes</h6>
+				  </div>
+				  <div class="clearfix"> </div>
+				</div>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed</p>
+				<div class="ftr-last">
+				  <div class="ftr-month">
+				     <h6>April</h6>
+				  </div>
+				  <div class="ftr-like">
+				     <h6>7 likes</h6>
+				  </div>
+				  <div class="clearfix"> </div>
+				</div>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed</p>
+			</div>
+		   <div class="clearfix"> </div>
+		</div>		
+	</div>
+  </div>
+</div>
+
+</body>
+</html>

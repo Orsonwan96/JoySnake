@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.dao.IMapper">
+  
+    <resultMap id="UserResults" type="com.ssm.entity.User">
+     <id column="uid" property="uid" jdbcType="INTEGER" javaType="Integer" />        
+     <result column="uname" property="uname" jdbcType="VARCHAR" javaType="string"/> 
+     <result column="icon" property="icon" jdbcType="VARCHAR" javaType="string"/> 
+     <result column="account" property="account" jdbcType="DOUBLE" javaType="double"/> 
+     <result column="usex" property="usex" jdbcType="VARCHAR" javaType="string"/> 
+     <result column="upassword" property="upassword" jdbcType="VARCHAR" javaType="string"/>
+     <result column="register_time" property="register_time" jdbcType="VARCHAR" javaType="string"/>
+     <result column="uage" property="uage" jdbcType="INTEGER" javaType="Integer"/>      
+     <collection property="listorder" ofType="com.ssm.entity.Order" >
+         <id column="oid" property="oid" jdbcType="INTEGER" javaType="Integer" /> 
+         <result column="pid" property="pid" jdbcType="INTEGER" javaType="Integer"/>  
+         <result column="num" property="num" jdbcType="INTEGER" javaType="Integer"/>       
+	     <result column="time" property="time" jdbcType="VARCHAR" javaType="string"/> 
+	     <result column="state" property="state" jdbcType="VARCHAR" javaType="string"/> 
+	     <result column="message" property="message" jdbcType="VARCHAR" javaType="string"/> 
+	     <result column="money" property="money" jdbcType="DOUBLE" javaType="double"/> 
+     </collection> 
+     <collection property="listcomment" ofType="com.ssm.entity.Comment" >
+         <id column="cid" property="cid" jdbcType="INTEGER" javaType="Integer" />        
+	     <result column="pid" property="pid" jdbcType="INTEGER" javaType="Integer"/> 
+	     <result column="ctime" property="ctime" jdbcType="VARCHAR" javaType="string"/> 
+	     <result column="ctext" property="ctext" jdbcType="VARCHAR" javaType="string"/> 
+	     <result column="isLike" property="isLike" jdbcType="VARCHAR" javaType="string"/>
+     </collection>    
+    </resultMap>      
+   
+   <resultMap id="PlaceResults" type="com.ssm.entity.Place">
+     <id column="pid" property="pid" jdbcType="INTEGER" javaType="Integer" />        
+     <result column="pname" property="pname" jdbcType="VARCHAR" javaType="string"/> 
+     <result column="time" property="time" jdbcType="INTEGER" javaType="Integer"/> 
+     <result column="position" property="position" jdbcType="VARCHAR" javaType="string"/> 
+     <result column="photo" property="photo" jdbcType="VARCHAR" javaType="string"/>
+     <result column="satisfaction" property="satisfaction" jdbcType="VARCHAR" javaType="string"/>
+     <result column="cost" property="cost" jdbcType="DOUBLE" javaType="double"/>   
+     <result column="childcost" property="childcost" jdbcType="DOUBLE" javaType="double"/> 
+     <result column="startDate" property="startDate" jdbcType="VARCHAR" javaType="string"/>
+     <result column="endDate" property="endDate" jdbcType="VARCHAR" javaType="string"/>
+     <result column="title" property="title" jdbcType="VARCHAR" javaType="string"/>
+     <result column="description" property="description" jdbcType="VARCHAR" javaType="string"/>
+     <result column="startPlace" property="startPlace" jdbcType="VARCHAR" javaType="string"/>
+     <result column="type" property="type" jdbcType="VARCHAR" javaType="string"/>
+     <result column="discount" property="discount" jdbcType="VARCHAR" javaType="string"/>
+     <result column="costSource" property="costSource" jdbcType="VARCHAR" javaType="string"/>
+     <result column="px" property="px" jdbcType="INTEGER" javaType="Integer"/> 
+     <result column="py" property="py" jdbcType="INTEGER" javaType="Integer"/> 
+     <result column="hotel" property="hotel" jdbcType="VARCHAR" javaType="string"/>
+     <result column="lunch" property="lunch" jdbcType="VARCHAR" javaType="string"/>
+     
+     
+     <collection property="listorder" ofType="com.ssm.entity.Order" >
+         <id column="oid" property="oid" jdbcType="INTEGER" javaType="Integer" />        
+	     <result column="uid" property="uid" jdbcType="INTEGER" javaType="Integer"/> 
+	     <result column="num" property="num" jdbcType="INTEGER" javaType="Integer"/> 
+	     <result column="time" property="time" jdbcType="VARCHAR" javaType="string"/> 
+	     <result column="state" property="state" jdbcType="VARCHAR" javaType="string"/> 
+	     <result column="message" property="message" jdbcType="VARCHAR" javaType="string"/> 
+	     <result column="money" property="money" jdbcType="DOUBLE" javaType="double"/>
+     </collection> 
+     <collection property="listcomment" ofType="com.ssm.entity.Comment" >
+         <id column="cid" property="cid" jdbcType="INTEGER" javaType="Integer" />        
+	     <result column="uid" property="uid" jdbcType="INTEGER" javaType="Integer"/> 
+	     <result column="ctime" property="ctime" jdbcType="VARCHAR" javaType="string"/> 
+	     <result column="ctext" property="ctext" jdbcType="VARCHAR" javaType="string"/> 
+	     <result column="isLike" property="isLike" jdbcType="VARCHAR" javaType="string"/>
+     </collection> 
+    </resultMap>
+    
+    <resultMap id="CommentResults" type="com.ssm.entity.Comment">
+     <id column="cid" property="cid" jdbcType="INTEGER" javaType="Integer" />        
+     <result column="uid" property="uid" jdbcType="INTEGER" javaType="Integer"/> 
+     <result column="pid" property="pid" jdbcType="INTEGER" javaType="Integer"/> 
+     <result column="ctime" property="ctime" jdbcType="VARCHAR" javaType="string"/> 
+     <result column="ctext" property="ctext" jdbcType="VARCHAR" javaType="string"/> 
+     <result column="isLike" property="isLike" jdbcType="VARCHAR" javaType="string"/>
+     <association property="users"  javaType="com.ssm.entity.User" 
+       resultMap="UserResults"/>
+     <association property="places"  javaType="com.ssm.entity.Place" 
+       resultMap="PlaceResults"/>
+    </resultMap>     
+    
+    <resultMap id="LiuyanResults" type="com.ssm.entity.Liuyan">
+     <id column="lid" property="lid" jdbcType="INTEGER" javaType="Integer" />
+     <result column="uname" property="uname" jdbcType="VARCHAR" javaType="string"/> 
+     <result column="mail" property="mail" jdbcType="VARCHAR" javaType="string"/> 
+     <result column="message" property="message" jdbcType="VARCHAR" javaType="string"/>
+    </resultMap> 
+    
+    <resultMap id="OrderResults" type="com.ssm.entity.Order">
+     <id column="oid" property="oid" jdbcType="INTEGER" javaType="Integer" />        
+     <result column="uid" property="uid" jdbcType="INTEGER" javaType="Integer"/> 
+     <result column="pid" property="pid" jdbcType="INTEGER" javaType="Integer"/> 
+     <result column="num" property="num" jdbcType="INTEGER" javaType="Integer"/> 
+     <result column="time" property="time" jdbcType="VARCHAR" javaType="string"/> 
+     <result column="state" property="state" jdbcType="VARCHAR" javaType="string"/> 
+     <result column="message" property="message" jdbcType="VARCHAR" javaType="string"/> 
+     <result column="money" property="money" jdbcType="DOUBLE" javaType="double"/> 
+     <association property="users"  javaType="com.ssm.entity.User" 
+       resultMap="UserResults"/>
+     <association property="places"  javaType="com.ssm.entity.Place" 
+       resultMap="PlaceResults"/>
+    </resultMap>      
+    
+    <resultMap id="AdministerResults" type="com.ssm.entity.Administer">
+     <id column="aid" property="aid" jdbcType="INTEGER" javaType="Integer" />        
+     <result column="Aage" property="Aage" jdbcType="INTEGER" javaType="Integer"/> 
+     <result column="Aname" property="Aname" jdbcType="VARCHAR" javaType="string"/> 
+     <result column="Apassword" property="Apassword" jdbcType="VARCHAR" javaType="string"/> 
+     <result column="Asex" property="Asex" jdbcType="VARCHAR" javaType="string"/> 
+     <result column="Aicon" property="Aicon" jdbcType="VARCHAR" javaType="string"/>
+    </resultMap>   
+   
+   
+   <!-- Adm -->
+   
+    <select id="SearchAllAdm" resultMap="AdministerResults" >
+      SELECT * from administer;
+    </select>
+    
+    <select id="SelectAdmByLogin" resultMap="AdministerResults"  parameterType="String">
+      SELECT * from administer where Aname=#{0} and Apassword=#{1};
+    </select>
+    
+    <insert id="AdmRegister"  parameterType="com.ssm.entity.Administer">
+       INSERT into administer(aid,Aname,Apassword,Aage,Asex,Aicon) values(null,#{Aname},#{Apassword},#{Aage},#{Asex},#{Aicon});
+    </insert>
+	
+	<select id="SearchAdmByName" resultMap="AdministerResults" parameterType="String">
+      SELECT * from administer where aname=#{0};
+    </select>    
+   
+   
+   <!-- Adm -->
+  <!--          user            -->
+    <select id="SelectUserByLogin" resultMap="UserResults"
+     parameterType="String">
+      SELECT * from user where uname=#{0} and upassword=#{1};
+    </select>
+    
+    <select id="SearchUserById" resultMap="UserResults"
+     parameterType="int">
+      SELECT * from user where uid=#{0};
+    </select>  
+    
+     <select id="SelectUserAll" resultMap="UserResults">
+      SELECT * from user order by register_time desc;
+    </select>
+   
+    <insert id="UserRegister"  parameterType="com.ssm.entity.User">
+       INSERT into user(uid,uname,upassword,uage,usex,account,icon,register_time) values(null,#{uname},#{upassword},#{uage},#{usex},#{account},#{icon},now());
+    </insert>
+    
+    <select id="SearchUserByName" resultMap="UserResults"
+     parameterType="String">
+      SELECT * from user where uname=#{0};
+    </select>
+    
+     <update id="UpdateUser" parameterType="com.ssm.entity.User">
+      update user set uage=#{uage}, usex=#{usex}, account=#{account}, register_time=now(), upassword = #{upassword}, uname=#{uname}, uid=#{uid} where uid=#{uid};
+    </update>
+    
+    <delete id="UserDelete" parameterType="com.ssm.entity.User">  
+        DELETE FROM user WHERE uid = #{uid}; 
+	</delete>  
+	
+	<select id="CountUserAll" resultMap="UserResults"
+     parameterType="String">
+      SELECT * from user where uname=#{0};
+    </select>
+    
+    <select id="GetTopFiveUser" resultType = "com.ssm.entity.User">
+	   SELECT `user`.* from `buy` JOIN `user` ON `buy`.uid = `user`.uid GROUP BY `user`.uid ORDER BY count(*) DESC LIMIT 5;
+	</select>
+	
+	<update id="UpdateUser1" parameterType="com.ssm.entity.User">
+      update user set uage=#{uage}, usex=#{usex}, uname=#{uname} where uid=#{uid};
+    </update>
+    
+    <update id="UpdateUsericon" parameterType="com.ssm.entity.User">
+      update user set icon=#{icon} where uid=#{uid};
+    </update>
+	
+	
+	<!--          user            -->
+	
+	<!--          place            -->
+	<select id="SelectPlaceAll" resultMap="PlaceResults">
+      SELECT * from place order by pid desc;
+    </select>
+	
+	<select id="SearchPlaceByName" resultMap="PlaceResults"
+     parameterType="String">
+      SELECT * from place where pname=#{0};
+    </select>
+    
+    <insert id="addPlace"  parameterType="com.ssm.entity.Place">
+       INSERT into place(pid,pname,position,photo,satisfaction,cost,time,childcost,startDate,endDate,title,description,startPlace,type,discount,costSource,px,py,hotel,lunch) values(null,#{pname},#{position},#{photo},#{satisfaction},#{cost},#{time},#{childcost},#{startDate},#{endDate},#{title},#{description},#{startPlace},#{type},#{discount},#{costSource},#{px},#{py},#{hotel},#{lunch});
+    </insert>
+    
+	 <select id="SearchPlaceById" resultMap="PlaceResults"
+     parameterType="int">
+      SELECT * from place where pid=#{0};
+    </select>  
+	
+	<delete id="PlaceDelete" parameterType="com.ssm.entity.Place">  
+        DELETE FROM place WHERE pid = #{pid}; 
+	</delete> 
+	
+	<update id="UpdatePlace" parameterType="com.ssm.entity.Place">
+      update place set pname=#{pname}, position=#{position}, satisfaction=#{satisfaction}, cost=#{cost}, time = #{time}, pid=#{pid}, childcost=#{childcost}, startDate=#{startDate}, endDate=#{endDate}, title=#{title}, description=#{description}, startPlace=#{startPlace}, type=#{type}, discount=#{discount}, costSource=#{costSource}, px=#{px}, py=#{py}, hotel=#{hotel}, lunch=#{lunch} where pid=#{pid};
+    </update>
+    
+    <!-- 新加 -->
+    <select id="SearchCommentByPid" resultMap="CommentResults" parameterType="int">
+       SELECT * from comment where pid=#{0};
+    </select>
+    
+    <select id="SelectPlaceByType" resultMap="PlaceResults" parameterType="String">
+     SELECT * from place  where place.type = #{0} order by pid desc;
+    </select>
+	
+	<select id="GetOneTypePlaces" resultType = "String">
+         SELECT pname from `buy`,place WHERE `buy`.pid = place.pid and place.type = #{0} GROUP BY `buy`.pid;
+	</select>
+	
+	<update id="UpdatePlaceicon" parameterType="com.ssm.entity.Place">
+      update place set photo=#{photo} where pid=#{pid};
+    </update>
+	
+	
+	<!--          place            -->
+
+  <!--                      comment      -->
+	
+	<select id="SelectCommentAll" resultMap="CommentResults">
+      SELECT * from comment order by cid desc;
+    </select>
+    
+    <insert id="addComment"  parameterType="com.ssm.entity.Comment">
+       INSERT into comment(cid,uid,pid,ctext,ctime,isLike) values(null,#{uid},#{pid},#{ctext},now(),#{isLike});
+    </insert>
+    
+    <select id="SearchCommentById" resultMap="CommentResults"
+     parameterType="int">
+      SELECT * from comment where cid=#{0};
+    </select>
+    
+    <delete id="CommentDelete" parameterType="com.ssm.entity.Comment">  
+        DELETE FROM comment WHERE cid = #{cid}; 
+	</delete>
+	
+	<update id="UpdateComment" parameterType="com.ssm.entity.Comment">
+      update comment set cid=#{cid}, pid=#{pid}, uid=#{uid}, ctext=#{ctext}, ctime=now(), isLike = #{isLike} where cid=#{cid};
+    </update>
+    <!--                comment              -->
+    
+    <!-- liuyan -->
+    
+    <select id="SelectLiuyanAll" resultMap="LiuyanResults">
+      SELECT * from liuyan order by lid desc;
+    </select>
+    
+    <insert id="addMessage"  parameterType="com.ssm.entity.Liuyan">
+       INSERT into liuyan(lid,uname,mail,message) values(null,#{uname},#{mail},#{message});
+    </insert>
+    
+    <select id="SearchLiuyanById" resultMap="LiuyanResults"
+     parameterType="int">
+      SELECT * from liuyan where lid=#{0};
+    </select>
+    
+    <delete id="LiuyanDelete" parameterType="com.ssm.entity.Liuyan">  
+        DELETE FROM liuyan WHERE lid = #{lid}; 
+	</delete>
+    <!-- liuyan -->
+
+<!--           order                               -->
+	
+	 <insert id="MakeOrder"  parameterType="com.ssm.entity.Order">
+     <!--    INSERT into user(uid,uname,upassword,uage,usex,account,icon,register_time) values(null,#{uname},#{upassword},#{uage},null,0,null,now());-->
+      INSERT into `buy`(oid,`time`,state,uid,pid,message,money, num) values(null,now(),#{state},#{uid},#{pid},#{message},#{money},#{num});
+       
+    </insert>
+	
+	<select id="SelectOrderAll" resultMap="OrderResults">
+     SELECT * from `buy`;
+    </select>
+	
+	<select id="GetUserIdByName" resultType = "Integer" parameterType = "String">
+	select uid from User where uname = #{0};
+	</select>
+	
+	<select id="GetPlaceIdByName" resultType = "Integer" parameterType = "String">
+	select pid from Place where pname = #{0};
+	</select>
+	
+	<select id="SearchOrderById" resultMap="OrderResults" parameterType = "int">
+	select * from `buy` where oid = #{0};
+	</select>
+	
+	<delete id="OrderDelete" parameterType="com.ssm.entity.Order">  
+        DELETE FROM `buy` WHERE oid = #{oid}; 
+	</delete>  
+	
+	<update id="UpdateOrder" parameterType="com.ssm.entity.Order">
+      update `buy` set oid=#{oid}, pid=#{pid}, uid=#{uid}, `time`=#{time}, state=#{state}, message=#{message}, money=#{money}, num=#{num} where oid=#{oid};
+    </update>
+    
+    <select id="GetTopThreePid" resultType = "Integer">
+	SELECT pid  from `buy` GROUP BY pid HAVING count(*) ORDER BY count(*) DESC LIMIT 3;
+	</select>
+
+<!--           order                               -->
+
+<!-- chart -->
+
+<select id="getnumoforder" resultType ="float" >
+			  select count(*) from `buy`, place where `buy`.pid =place.pid and year(buy.time)=2017 and position = #{1} and month(buy.time) = #{0};
+	 </select>
+	 
+	 <select id="satisfycount" resultType ="int" parameterType = "String">
+	    	SELECT COUNT(*) FROM comment where isLike= #{0};
+      </select>
+      
+      <select id="typecount" resultType ="int" parameterType = "String">
+	    	SELECT COUNT(*) from `buy` join place on (`buy`.pid=place.pid) where place.type= #{0};
+      </select>
+      
+       <select id="todayorder" resultType ="int">
+			   select count(*) from `buy` where to_days(`time`) = to_days(now());
+	 </select>
+	 
+	  <select id="todaycomment" resultType ="int">
+			   select count(*) from `comment` where to_days(ctime) = to_days(now());
+	 </select>
+	 
+	  <select id="todayuser" resultType ="int">
+			   select count(*) from `user` where to_days(register_time) = to_days(now());
+	 </select>
+	 
+	  <select id="placecount" resultType ="int">
+			  SELECT count(*) from place;
+	 </select>
+	 
+	 <select id="GetNumOfDifAge" resultType="int" >
+        SELECT count(*) from `buy`, `user`, place where `buy`.uid = `user`.uid and `buy`.pid = place.pid and pname = #{0} and `user`.uage &gt;#{1} and `user`.uage &lt; #{2};
+     </select>
+     
+     <select id="GetAllPositionPlace" resultMap="PlaceResults">
+      SELECT * from place GROUP BY position; 
+     </select>
+     
+
+	 <!-- chart -->
+	 
+<!-- chuangxin -->
+	 
+<select id="SelectAllPlace" resultType ="String">
+	    	select distinct place.position from place;
+</select>
+
+<select id="SelectPlaceByPosition" resultMap="PlaceResults" parameterType="String">
+      SELECT * from place where position=#{0};
+</select>
+<select id="SelectAllStartPlace" resultType ="String">
+	    	select distinct place.startPlace from place where position=#{0};
+</select>
+<!-- chuangxin -->
+
+	
+</mapper>

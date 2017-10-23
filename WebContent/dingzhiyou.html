@@ -1,0 +1,534 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>私人订制</title>
+<link href="index/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="index/js/jquery-1.11.0.min.js"></script>
+<!-- Custom Theme files -->
+<link href="index/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--Google Fonts-->
+<!--  <link href='http://fonts.useso.com/css?family=Lato:400,300,700,900' rel='stylesheet' type='text/css'>  -->
+<!-- animated-css -->
+		<link href="index/css/animate.css" rel="stylesheet" type="text/css" media="all">
+		<script src="index/js/wow.min.js"></script>
+		<script>
+		 new WOW().init();
+		</script>
+<!-- animated-css -->
+
+<style>
+  #inner
+  {
+  position:relative;
+     height:600px;
+     width:1200px;
+     z-index:1;
+  }
+  
+  #gaiyao
+  {
+  position:relative;
+     height:1400px;
+     width:1200px;
+     z-index:1;
+  }
+  
+  #wenjuan
+  {
+  position:absolute;
+     left:1000px;
+     top:180px;
+     z-index:1;
+  }
+  
+  #con
+  {
+  position:absolute;
+     left:400px;
+     top:180px;
+     z-index:1;
+  }
+  
+  #sta
+  {
+  position:absolute;
+     left:1020px;
+     top:280px;
+     z-index:1;
+  }
+  
+  #df
+  {
+  position:absolute;
+     left:400px;
+     top:310px;
+     z-index:1;
+  }
+  
+  #short
+  {
+   background-image:url('images/timg.jpg'); 
+
+  }
+  
+  #inner1
+  {
+     position:absolute;
+     z-index:0;
+  }
+  
+</style>    
+
+<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2" language="javascript"></script>
+<script type="text/javascript">
+ $(document).ready(function(){
+	 function getUrlParam(name) {
+		  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+		  var r = window.location.search.substr(1).match(reg); //匹配目标参数
+		  if (r != null) return unescape(r[2]); return null; //返回参数值
+	}
+	 var time = getUrlParam("time"); 
+	 var money = getUrlParam("money");
+       $.ajax({
+		  url: "road/SelectAllPlace.action",    //请求的url地址，获取全部roles职务的名称
+	      dataType: "json",   //返回的异步数据格式为不能json，是文本格式
+
+	      type: "post",   //请求方式，默认post	
+	   	 success:function(data) {	
+	   		var op="";
+	   		$.each(data,function(i){
+	   				op+="<option value='"+data[i]+
+	   			     "'>"+data[i]+"</option>";	   			
+	   		});
+	   		$("#dname").html(op);
+	    },		   
+	    error:function() {
+	        //请求出错处理
+	        alert("运行异常a");
+	    }
+	}); 
+       
+ 
+ $("#btn").click(function(){
+ 
+     $.ajax({
+		  url: "road/SelectPlaceByPositon.action",    //请求的url地址，获取全部roles职务的名称
+		 method: "POST",
+			data: {"position":$("#dname").val()},	     
+			dataType: "json",
+	   	 success:function(data) {	
+
+   		    var ul=document.createElement("ul");
+   		    
+	   		$.each(data,function(i){
+	
+	   		        var place=data[i];
+	   		        // 加入复选框
+	   		        var checkBox=document.createElement("input");
+	   		        checkBox.setAttribute("type","checkbox");
+	   		        checkBox.setAttribute("id",place.pid);
+	   		        checkBox.setAttribute("name", place.pname);
+
+	   		        var li=document.createElement("li");
+	   		        li.appendChild(checkBox);        
+	   		        li.appendChild(document.createTextNode(place.pname));
+
+	   		        ul.appendChild(li);        	   			
+	   		});
+	   		$("#executerDiv").append(ul);
+	   		alert("choose place");
+	    },		   
+	    error:function() {
+	        //请求出错处理
+	        alert("运行异常a");
+	    }
+	}); 
+     $.ajax({
+		  url: "road/SelectAllStartPlace.action",    //请求的url地址，获取全部roles职务的名称
+	      dataType: "json",   //返回的异步数据格式为不能json，是文本格式
+	      data: {"position":$("#dname").val()},	
+	      method: "POST",
+	   	 success:function(data) {	
+	   		var opt="";
+	   		$.each(data,function(i){
+	   				opt+="<option value='"+data[i]+
+	   			     "'>"+data[i]+"</option>";	   			
+	   		});
+	   		$("#startP").html(opt);
+	    },		   
+	    error:function() {
+	        //请求出错处理
+	        alert("运行异常a");
+	    }
+	}); 
+ });
+
+ 
+ 
+ 
+ $("#start").click(function(){
+	 
+	      var place="";
+	        $('input:checkbox:checked').each(function() {
+	            place+=$(this).attr('id');
+	            place+=",";
+	        });
+	        
+	 $.ajax({
+		  url: "road/getPlace.action",    //请求的url地址，获取全部roles职务的名称
+	      dataType: "json",   //返回的异步数据格式为不能json，是文本格式
+	      data: {"startPlace":$("#startP").val(),
+	    	     "result":output,
+	    	     "pids":place,
+	    	     "time":time,
+	    	     "money":money},	
+	      method: "POST",
+	   	 success:function(data) {	
+	   		$.each(data,function(i){
+	   			//alert(data[i].photo);
+	   			$("#inner").append(data[i].photo);
+	   		}); 
+	   		
+	   		//draw
+	   		var day=2;
+	   		var informations=data[0].information;
+	   		var hotels=data[0].hotel;
+	   		var lunches=data[0].lunch;
+	   		var travels=data[0].travel;
+	   		var last=data[0].last;
+	   		var start=data[0].start;
+	   		
+	   		var information= new Array(); //定义一数组 
+	   		information=informations.split(","); //字符分割 
+	   		var hotel= new Array(); //定义一数组 
+	   		hotel=hotels.split("#"); //字符分割 
+	   		var lunch= new Array(); //定义一数组 
+	   		lunch=lunches.split("#"); //字符分割 
+	   		var travel= new Array(); //定义一数组 
+	   		travel=travels.split("#"); //字符分割 
+	   		
+	   		var roads=data[0].roads;
+	   		var road= new Array(); //定义一数组 
+	   		road=roads.split(","); //字符分割 
+	   		
+	   		var htmlstart = '';
+		       htmlstart += "<div class='alert alert-info'>" + start + "</div>" + "</br>";
+		       $("#travel").append(htmlstart);
+		       
+		       var startDay='';
+	    	     startDay += "<h2 align='center'>" + "第一天" +"</h2>" + "</br>";
+	    	     $("#travel").append(startDay);
+		       
+	   		for (var i=0; i<parseInt(road[0])-1; i++) 
+		   	{	
+	   		   var html = '';
+		   	   var xinxi=travel[i]+information[i]+lunch[i]+hotel[i];
+		       html += "<div class='alert alert-info'>" + xinxi + "</div>" + "</br>";
+		       $("#travel").append(html);
+		       if (xinxi.indexOf("玩蛇网推荐您暂住在")!=-1) 
+		    	   {
+		    	     var d="第"+day+"天";
+		    	     var days='';
+		    	     days += "<h2 align='center'>" + d +"</h2>" + "</br>";
+		    	     $("#travel").append(days);
+		    	     day=day+1;
+		    	   }
+		   	}
+	   		
+	   		var htmllast = '';
+		       htmllast += "<div class='alert alert-info'>" + last + "</div>" + "</br>" +"<h2 align='center'>" + "行程结束" +"</h2>" + "</br>";
+		       $("#travel").append(htmllast);
+		       
+		       
+
+	   		
+	   		
+	   	//连接线	
+	   	for (var i=0; i<parseInt(road[0])-1; i++) 
+	   	{	
+	   		/*<path id="myPath" fill="none" stroke="#000000" stroke-miterlimit="10" d="M91.4,104.2c3.2-3.4,18.4-0.6,23.4-0.6c5.7,0.1,10.8,0.9,16.3,2.3
+	   		    c13.5,3.5,26.1,9.6,38.5,16.2c12.3,6.5,21.3,16.8,31.9,25.4c10.8,8.7,21,18.3,31.7,26.9c9.3,7.4,20.9,11.5,31.4,16.7
+	   		    c13.7,6.8,26.8,9.7,41.8,9c21.4-1,40.8-3.7,61.3-10.4c10.9-3.5,18.9-11.3,28.5-17.8c5.4-3.7,10.4-6.7,14.8-11.5
+	   		    c1.9-2.1,3.7-5.5,6.5-6.5"/>
+	   		  <text>
+	   		    <textpath xlink:href="#myPath">
+	   		      Text laid out along a path.
+	   		       
+	   		      <animate attributeName="startOffset" from="0%" to ="100%" begin="0s" dur="5s" repeatCount="indefinite" keyTimes="0;1" calcMode="spline" keySplines="0.1 0.2 .22 1"/>
+	   		    </textpath>
+	   		  </text>   */
+	   		var mysvg = document.getElementById("inner1");  
+		        var rectObj = document.createElementNS("http://www.w3.org/2000/svg","path");  
+		        var ami = document.createElementNS("http://www.w3.org/2000/svg","animateMotion");  
+		      //  var text = document.createElementNS("http://www.w3.org/2000/svg","text");
+		        if(rectObj)
+		        {  
+		        	//x1="0" y1="0" x2="200" y2="200"
+		           var x1=road[4*i+1].substring(0,road[4*i+1].indexOf("px"));
+		           var y1=road[4*i+2].substring(0,road[4*i+2].indexOf("px"));
+		           var x2=road[4*i+3].substring(0,road[4*i+3].indexOf("px"));
+		           var y2=road[4*i+4].substring(0,road[4*i+4].indexOf("px"));
+		        	var p="M"+x1+" "+y1+" "+"L"+x2+" "+y2;
+		        	rectObj.setAttribute("d",p); 
+		        	rectObj.setAttribute("id","abc");  
+		            rectObj.setAttribute("style","stroke:rgb(255,0,255);stroke-width:2");  
+		            //rectObj.setAttribute("marker-start","url(#markerArrow)");  
+		            //rectObj.setAttribute("marker-mid","url(#markerArrow)");  
+		            rectObj.setAttribute("marker-end","url(#markerArrow)");  
+		            mysvg.appendChild(rectObj);  
+		        }
+	   		
+	        
+	        
+	   	}              //连接线	
+       
+   	        //draw
+	   	    
+	    },		   
+	    error:function() {
+	        //请求出错处理
+	        alert("运行异常a");
+	    }
+	});  
+         
+ });
+ 
+ $("#dfn").click(function(){
+	 var place= new Array();
+	 var i = 0;
+
+	$('input:checkbox:checked').each(function() {	
+	place[i] = "";
+//	place[i] += "\"";	
+
+	            place[i] += $(this).attr('name');
+	            
+	          //  place[i] += "\"";
+
+	i++;
+	}); 
+
+	for(var n = 0; n < place.length; n++){
+	if(n == place.length - 1){
+	break;
+	}
+	else{
+	for(var m = n + 1; m < place.length; m++){
+	SetMap2(place[n],place[m]);
+	}
+	}
+	}
+	 });
+ 
+ 
+ 
+ 
+ 
+});
+
+ </script>
+
+</head>
+<body>
+<!--header start here-->
+<div class="header">
+   <div class="container">
+     <div class="header-main">
+	   <div class="logo wow bounceInLeft" data-wow-delay="0.3s">
+	     <a href="index.html"><img src="images/logo1.png" alt=""></a>
+	   </div>
+	   <div class="top-navg">
+			   <span class="menu"> <img src="images/icon.png" alt=""/></span>	
+			   <nav class="cl-effect-13">					
+				<ul class="res">
+					<li><a href="index.html">首页</a></li>
+					<li><a href="about.html">关于</a></li>
+					<li><a href="sight.html">景点推荐</a></li>
+					<li><a class="active" href="dingzhiyou.html">个性定制</a></li>
+					<li><a href="comment.html">点评区</a></li>
+					<li><a href="contact.html">联系我们</a></li>
+				</ul>
+			 </nav>
+			<!-- script-for-menu -->
+				 <script>
+				   $( "span.menu" ).click(function() {
+					 $( "ul.res" ).slideToggle( 300, function() {
+					 // Animation complete.
+					  });
+					 });
+				</script>					
+	   </div>
+	    <div class="clearfix"> </div>
+      </div>
+    </div>
+  </div>
+<!--header end here-->
+<!--short codes start here-->
+<div id="short" class="shortcodes">
+	<div class="container">
+	<div class="page">
+
+      <div class="form-group">
+        <label  for="dname">目标城市:</label>
+        <select class="btn btn-1 btn-default" id="dname" name="udid" class="form-control m-bot15">  </select>
+               <div  id="con" class="ban-btn">
+	      	     <a href="#" id="btn" class="hvr-bounce-out">确定</a>
+	       </div>
+	      
+      </div>
+      
+      
+        <div id="wenjuan" class="ban-btn">
+	      	  <a href="wenjuan.html" class="hvr-bounce-out">订制信息采集</a>
+	     </div>
+      
+    
+      <div class="form-group">
+      </br>
+      </br>
+         <label  for="startP">出发城市:</label>
+           <select class="btn btn-1 btn-default" id="startP" name="startPlace" class="form-control m-bot15">  </select>
+      </div>
+      
+    
+      <div style="color:#FFFFFF"" id="result">
+      </br>
+         <div id="executerDiv" style="font-size:21px;">请选择你想玩的景点：</div>
+    
+         
+      </div>
+      
+      
+       <div id="df" class="ban-btn">
+	      	  <button id="dfn" class="btn btn-lg btn-primary">订制路线</button>
+	     </div>
+	     
+      <div id="sta" class="ban-btn">
+	      	  <a href="#" id="start" class="hvr-bounce-out">绘制路线</a>
+	    </div>
+	    
+	     
+	 
+	     
+
+       
+       
+    <div id="inner">
+    
+      <svg id="inner1"    version="1.1" xmlns="http://www.w3.org/2000/svg" height="600" width="1200">
+      
+          <defs>  
+             <marker id="markerArrow" markerWidth="13" markerHeight="13" refx="2" refy="6" orient="auto">  
+             <path d="M2,2 L2,11 L10,6 L2,2" style="fill: #000000;" />  
+             </marker>  
+      </svg>
+    </div>
+    
+    <div id="gaiyao">
+        <h2>行程概要</h2>
+        <br>
+         <div id="travel">
+        
+        </div>
+       
+       
+
+	</div>
+	
+	
+	<div style="display:none;">
+	  <input  type="text" id="gongli" size="10" />
+	  <input type="text" id="shijian" size="10" />
+     
+      <div style="height: 1px; border: 1px solid gray; display: none" id="container"; >      </div>
+        <div class="content_title" style="display: none;color:Red; background-image:url();border-bottom:solid 1px #ccc; height:30px; text-align:center; font-weight:bold; line-height:30px;" id="div_title">查询结果</div>
+        <div id="div_gongli" style="display: none;color:#336600; font-weight:bold; padding-left:5px; line-height:35px; font-size:14px;"></div>
+        <div id="results" style="display:none; font-size: 12px;">        </div>
+        
+	
+</div>
+</div>
+</div>
+<!--short codes end here-->
+<!--footer start here-->
+<div class="map">
+	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d158858.182370726!2d-0.10159865000000001!3d51.52864165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2sLondon%2C+UK!5e0!3m2!1sen!2sin!4v1431577187804"> </iframe>
+  <div class="footer">
+	<div class="container">
+		<div class="footer-main">
+			<div class="col-md-4 ftr-grids wow bounceIn" data-wow-delay="0.4s">
+				<h4>Get in Touch</h4>
+				<ul class="get-touch">
+					<li><span class="share"> </span><a href="#">Tempor incididunt ut labore et dolore </a></li>
+					<li><span class="email"> </span><a href="mailto:info@example.com">example@gmail.com</a> </li>
+					<li><span class="phone"> </span>+613 1544 5578 </li>
+				</ul>
+			</div>
+			<div class="col-md-4 ftr-grids wow bounceIn" data-wow-delay="0.4s">
+				<h4>Follow Us</h4>
+				<ul class="mid-grid">
+					<li><a href="#"><span class="tw"> </span></a></li>
+					<li><a href="#"><span class="gmail"> </span></a> </li>
+					<li><a href="#"><span class="inst"> </span></a> </li>
+					<li><a href="#"><span class="pri"> </span></a> </li>					
+				</ul>
+			</div>
+			<div class="col-md-4 ftr-grids wow bounceIn" data-wow-delay="0.4s">
+				<h4>Popular Posts</h4>
+				<div class="ftr-last">
+				  <div class="ftr-month">
+				     <h6>January</h6>
+				  </div>
+				  <div class="ftr-like">
+				     <h6>3 likes</h6>
+				  </div>
+				  <div class="clearfix"> </div>
+				</div>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed</p>
+				<div class="ftr-last">
+				  <div class="ftr-month">
+				     <h6>February</h6>
+				  </div>
+				  <div class="ftr-like">
+				     <h6>5 likes</h6>
+				  </div>
+				  <div class="clearfix"> </div>
+				</div>
+				<p>Lorem ipsum dolor sit consectetur adipiscing eiusmod tempor</p>
+				<div class="ftr-last">
+				  <div class="ftr-month">
+				     <h6>March</h6>
+				  </div>
+				  <div class="ftr-like">
+				     <h6>2 likes</h6>
+				  </div>
+				  <div class="clearfix"> </div>
+				</div>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed</p>
+				<div class="ftr-last">
+				  <div class="ftr-month">
+				     <h6>April</h6>
+				  </div>
+				  <div class="ftr-like">
+				     <h6>7 likes</h6>
+				  </div>
+				  <div class="clearfix"> </div>
+				</div>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed</p>
+			</div>
+		   <div class="clearfix"> </div>
+		</div>		
+	</div>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript" src="js/juli.js"></script>
+</html>

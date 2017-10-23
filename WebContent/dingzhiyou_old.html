@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+  #inner
+  {
+      position:absolute;
+     height:600px;
+     width:1200px;
+     background:url(images/beijin.jpg);
+     left:50px;
+     top:400px;
+     z-index:-1;
+  }
+</style>
+
+<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2" language="javascript"></script>
+<script type="text/javascript">
+ $(document).ready(function(){
+       $.ajax({
+		  url: "road/SelectAllPlace.action",    //请求的url地址，获取全部roles职务的名称
+	      dataType: "json",   //返回的异步数据格式为不能json，是文本格式
+
+	      type: "post",   //请求方式，默认post	
+	   	 success:function(data) {	
+	   		var op="";
+	   		$.each(data,function(i){
+	   				op+="<option value='"+data[i]+
+	   			     "'>"+data[i]+"</option>";	   			
+	   		});
+	   		$("#dname").html(op);
+	    },		   
+	    error:function() {
+	        //请求出错处理
+	        alert("运行异常a");
+	    }
+	}); 
+       
+ 
+ $("#btn").click(function(){
+ 
+     $.ajax({
+		  url: "road/SelectPlaceByPositon.action",    //请求的url地址，获取全部roles职务的名称
+		 method: "POST",
+			data: {"position":$("#dname").val()},	     
+			dataType: "json",
+	   	 success:function(data) {	
+
+   		    var ul=document.createElement("ul");
+   		    
+	   		$.each(data,function(i){
+	
+	   		        var place=data[i];
+	   		        // 加入复选框
+	   		        var checkBox=document.createElement("input");
+	   		        checkBox.setAttribute("type","checkbox");
+	   		        checkBox.setAttribute("id",place.pid);
+	   		        checkBox.setAttribute("name", place.pname);
+
+	   		        var li=document.createElement("li");
+	   		        li.appendChild(checkBox);        
+	   		        li.appendChild(document.createTextNode(place.pname));
+
+	   		        ul.appendChild(li);        	   			
+	   		});
+	   		$("#executerDiv").append(ul);
+	   		alert("choose place");
+	    },		   
+	    error:function() {
+	        //请求出错处理
+	        alert("运行异常a");
+	    }
+	}); 
+     $.ajax({
+		  url: "road/SelectAllStartPlace.action",    //请求的url地址，获取全部roles职务的名称
+	      dataType: "json",   //返回的异步数据格式为不能json，是文本格式
+	      data: {"position":$("#dname").val()},	
+	      method: "POST",
+	   	 success:function(data) {	
+	   		var opt="";
+	   		$.each(data,function(i){
+	   				opt+="<option value='"+data[i]+
+	   			     "'>"+data[i]+"</option>";	   			
+	   		});
+	   		$("#startP").html(opt);
+	    },		   
+	    error:function() {
+	        //请求出错处理
+	        alert("运行异常a");
+	    }
+	}); 
+ });
+
+ 
+ 
+ 
+ $("#start").click(function(){
+	 alert(output);
+	      var place="";
+	        $('input:checkbox:checked').each(function() {
+	            place+=$(this).attr('id');
+	            place+=",";
+	        });
+	        alert(place);
+	 $.ajax({
+		  url: "road/getPlace.action",    //请求的url地址，获取全部roles职务的名称
+	      dataType: "json",   //返回的异步数据格式为不能json，是文本格式
+	      data: {"startPlace":$("#startP").val(),
+	    	     "result":output,
+	    	     "pids":place},	
+	      method: "POST",
+	   	 success:function(data) {	
+	   		$.each(data,function(i){
+	   			//alert(data[i].photo);
+	   			$("#inner").append(data[i].photo);
+	   			
+	   		});	
+	   		
+	    },		   
+	    error:function() {
+	        //请求出错处理
+	        alert("运行异常a");
+	    }
+	});  
+         
+ });
+ 
+ $("#dfn").click(function(){
+	 var place= new Array();
+	 var i = 0;
+
+	$('input:checkbox:checked').each(function() {	
+	place[i] = "";
+//	place[i] += "\"";	
+
+	            place[i] += $(this).attr('name');
+	            
+	          //  place[i] += "\"";
+
+	i++;
+	}); 
+
+	for(var n = 0; n < place.length; n++){
+	if(n == place.length - 1){
+	break;
+	}
+	else{
+	for(var m = n + 1; m < place.length; m++){
+	SetMap2(place[n],place[m]);
+	}
+	}
+	}
+	 });
+ 
+ 
+ 
+});
+
+ </script>
+</head>
+
+<body>
+    <div class="form-group">
+      <label  for="dname">所在部门:</label>
+      <select class="combobox" id="dname" name="udid" class="form-control m-bot15">  </select>
+    </div>
+    
+    <div >
+    <label  for="startP">出发城市:</label>
+      <select id="startP" name="startPlace" class="form-control m-bot15">  </select>
+    <button id="btn">  confirm </button>
+    </div>
+    
+    <div>
+    <div id="executerDiv">结果</div>
+    
+    <button id="start"> Start! </button>
+    <button id="dfn"> 1</button>
+    </div>
+    
+    <div id="inner">
+
+    </div>
+  
+  
+<div style="display:none;">
+	  <input  type="text" id="gongli" size="10" />
+	  <input type="text" id="shijian" size="10" />
+     
+      <div style="height: 1px; border: 1px solid gray; display: none" id="container"; >      </div>
+        <div class="content_title" style="display: none;color:Red; background-image:url();border-bottom:solid 1px #ccc; height:30px; text-align:center; font-weight:bold; line-height:30px;" id="div_title">查询结果</div>
+        <div id="div_gongli" style="display: none;color:#336600; font-weight:bold; padding-left:5px; line-height:35px; font-size:14px;"></div>
+        <div id="results" style="display:none; font-size: 12px;">        </div>
+	
+</div>
+
+</body>
+<script type="text/javascript" src="js/juli.js"></script>
+</html>

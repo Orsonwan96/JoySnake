@@ -1,0 +1,211 @@
+
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Accessible Profile Widget a Responsive Widget Template  :: w3layouts</title>
+	<link href="information/css/style.css" rel='stylesheet' type='text/css'/>
+	
+	<link href="information/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="Accessible Profile Widget Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+			<script src="js/jquery.min.js"></script>
+			<script>$(document).ready(function(c) {
+			$('.alert-close').on('click', function(c){
+				$('.main-agile').fadeOut('slow', function(c){
+					$('.main-agile').remove();
+				});
+				
+			});	  
+
+			var str= window.localStorage?localStorage.getItem("userid"):Cookie.read("userid");
+			$.ajax({
+    			url:"usert/userEntity.action",
+    			method: "POST",     
+    			data: {"uid":str},
+    			dataType: "json",
+    			success:function(data){
+    				$("#uid1").val(data.uid);
+    				$("#uid").val(data.uid);
+    				$("#uname").val(data.name);
+    				$("#usex").val(data.usex);
+    				$("#uage").val(data.age);
+    				$("#uaccount").val(data.account);
+    				$("#icon").attr('src',data.icon);
+    			},
+    			error:function(){
+    				alert("error!");
+    			}
+    		}); 
+			
+			$("#icon").click(function(){
+				$("#fileToUpload").click();
+			});
+			
+			$("#submit").click(function(){
+				var formData = new FormData($("#form_face")[0]);  	
+				$("#form_face").ajaxSubmit({
+				    url: "usert/UpdateUser.action",    //请求的url地址	
+				    type: 'POST',  
+				    data: formData, 
+			        ///cache: false,  
+			        //contentType: false,//"multipart/form-data"  
+			        //processData: false,  
+				    dataType: "text", 
+				   	success:function(data) {	
+				   		if(data.indexOf("success")!=-1){
+				   			alert("更新成功");
+				   			location.href="http://localhost:8080/abc/index.html";
+				   			//location.replace("grades.html");
+				   		}else{
+				   			alert("失败");
+				   		}
+				    },		   
+				    error:function() {
+				        //请求出错处理
+				        alert("运行异常l");
+				    }
+				});	
+			});
+			
+			
+		});
+		</script>
+</head>
+<body>
+	<h1>用户个人信息修改</h1>
+		<div class="main-agileits">
+		<div class="right-wthree">
+			     <div class="face">
+				 <p><img style="cursor: pointer" width='220px' height='250px' id = "icon" class="normalFace" src="./images/upload.jpg" onclick="fileSelect();"></p>
+				 <form id="formicon" action="usert/UpdateUsericon.action" method="post" enctype="multipart/form-data" style="width:auto;">
+				  <input id = "uid1" name = "uid1"  readonly="true" style="display:none"></input>
+				  <input type="file" name="fileToUpload" id="fileToUpload" onchange="fileSelected(this);" style="display:none;">
+				  <!-- fileToUpload -->
+				 </form>
+				  </div>
+		<!--  		<img id = "icon" src="images/woman-1254453_640.jpg" alt="image" />  -->
+				
+			</div>
+			<div class="left-w3ls">
+			<ul class="address">
+			                                        <li>
+														<ul class="address-text">
+															
+															<form id="form_face" action="usert/UpdateUser.action" method="post" enctype="multipart/form-data" style="width:auto;">
+															<li><b>您的id </b></li>
+															<input id = "uid" name = "uid" form = "form_face" readonly="true"></input>
+															</form>
+														</ul>
+													</li>
+													<li>
+														<ul class="address-text">
+															<li><b>名字 </b></li>
+															<input id = "uname" name = "uname" form = "form_face"></input>
+														</ul>
+													</li>
+													<li>
+														<ul class="address-text">
+															<li><b>性别 </b></li>
+															<input id = "usex" name = "usex" form = "form_face"></input>
+														</ul>
+													</li>
+													<li>
+														<ul class="address-text">
+															<li><b>年龄 </b></li>
+															<input id = "uage" name = "uage" form = "form_face"></input>
+														</ul>
+													</li>
+													<li>
+														<ul class="address-text">
+															<li><b>账户余额 </b></li>
+															<input id = "uaccount" disabled="true"></input>
+														</ul>
+													</li>
+												</ul>
+				
+				<div class="button">
+					<a id="submit" href="#">提交修改</a>
+				</div>
+
+						<div id="small-dialog" class="mfp-hide w3ls_small_dialog wthree_pop">		
+						<div class="agileits_modal_body">
+							<iframe src="https://player.vimeo.com/video/8483438?title=0&byline=0&portrait=0"></iframe>
+						</div>
+					</div>
+	<!-- //pop-up-box -->
+					<script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
+					<script>
+					$(document).ready(function() {
+					$('.popup-with-zoom-anim').magnificPopup({
+					type: 'inline',
+					fixedContentPos: false,
+					fixedBgPos: true,
+					overflowY: 'auto',
+					closeBtnInside: true,
+					preloader: false,
+					midClick: true,
+					removalDelay: 300,
+					mainClass: 'my-mfp-zoom-in'
+					});
+
+					});
+					</script>
+
+			</div>
+			
+			<div class="clear"></div>
+		</div>
+	<footer>
+		<p class="agileinfo"></p>
+	</footer>
+</body>
+    <script type="text/javascript" src="js/browser.js"></script>
+    <script type="text/javascript" src="js/fileinput.js"></script>
+	<script type="text/javascript" src="js/fileinput_locale_zh.js"></script>
+	<script src="js/jquery.form.js" type="text/javascript"></script>
+	<script src="js/fileload.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/bootstrap-fileupload.js"></script>
+  <script type="text/javascript">
+    
+    function fileSelected(file) {
+      // 文件选择后触发次函数
+     
+      var reader = new FileReader();  
+      reader.onload = function(evt){
+    	  $("#icon").attr('src',evt.target.result)}; 
+    	  reader.readAsDataURL(file.files[0]); 
+    	  var formData = new FormData($("#formicon")[0]);  	
+			$("#formicon").ajaxSubmit({
+			    url: "usert/UpdateUsericon.action",    //请求的url地址	
+			    type: 'POST',  
+			    data: formData, 
+		        ///cache: false,  
+		        //contentType: false,//"multipart/form-data"  
+		        //processData: false,  
+			    dataType: "text", 
+			   	success:function(data) {
+			   		if(data.indexOf("success")!=-1){	
+			   			//location.replace("grades.html");
+			   		}else{
+			   			alert("失败");
+			   		}
+			    },		   
+			    error:function() {
+			        //请求出错处理
+			        alert("运行异常l");
+			    }
+			});	
+    }
+  </script>
+
+
+</html>

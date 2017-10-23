@@ -1,0 +1,333 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>About</title>
+<link href="css/bootstrap_about.css" rel="stylesheet" type="text/css" media="all">
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="index/js/jquery-1.11.0.min.js"></script>
+<!-- Custom Theme files -->
+<link href="css/style_about.css" rel="stylesheet" type="text/css" media="all"/>
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--Google Fonts-->
+<!-- <link href='http://fonts.useso.com/css?family=Lato:400,300,700,900' rel='stylesheet' type='text/css'>  -->
+<!-- //end-smoth-scrolling -->
+<link rel="stylesheet" href="index/css/flexslider.css" type="text/css" media="screen" />
+<!-- animated-css -->
+		<link href="index/css/animate.css" rel="stylesheet" type="text/css" media="all">
+		<script src="index/js/wow.min.js"></script>
+		<script>
+		 new WOW().init();
+		</script>
+<!-- animated-css -->
+	<script src="js/unslider.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		$.ajax({
+	 		  url: "placet/SelectThreePlace.action",    //请求的url地址，获取全部roles职务的名称
+	 	      dataType: "json",   //返回的异步数据格式为不能json，是文本格式
+	 	      type: "post",   //请求方式，默认post	
+	 	   	 success:function(data) {	
+	 	   		$("#p1").attr('src', data[0].src);
+	 	      	$("#p2").attr('src', data[1].src);
+	 	        $("#p3").attr('src', data[2].src);
+	 	        $("#p4").attr('src', data[3].src);
+	 	        $("#p5").attr('src', data[4].src);
+	 	       
+	 	    },		   
+	 	    error:function() {
+	 	        //请求出错处理
+	 	        alert("运行异常a");
+	 	    }
+	 	}); 
+		
+		
+	});
+	</script>
+</head>
+<body>
+<!--header start here-->
+ <div class="header">
+   <div class="container">
+     <div class="header-main">
+	   <div class="logo wow bounceInLeft" data-wow-delay="0.3s">
+	     <a href="index.html"><img src="images/logo1.png" alt=""></a>
+	   </div>
+	   <div class="top-navg">
+			   <span class="menu"> <img src="images/icon.png" alt=""/></span>		
+			  <nav class="cl-effect-13">				
+				<ul class="res">
+					<li><a href="index.html">首页</a></li>
+					<li><a class="active" href="about.html">关于</a></li>
+					<li><a href="sight.html">景点推荐</a></li>
+					<li><a href="dingzhiyou.html">个性定制</a></li>
+					<li><a href="comment.html">点评区</a></li>
+					<li><a href="contact.html">联系我们</a></li>
+				</ul>
+			 </nav>
+			<!-- script-for-menu -->
+				 <script>
+				   $( "span.menu" ).click(function() {
+					 $( "ul.res" ).slideToggle( 300, function() {
+					 // Animation complete.
+					  });
+					 });
+				</script>					
+	   </div>
+	    <div class="clearfix"> </div>
+      </div>
+    </div>
+  </div>
+<!--header end here-->
+
+
+<!--about start here-->
+<div class="about">
+	<div class="container">
+		<div class="about-main">
+			 <h1>关于</h1>
+			 <span class="lft-bar-about"> </span>
+			 <span class="rit-bar-about"> </span>
+           <div class="col-md-6 about-left wow bounceInLeft" data-wow-delay="0.3s">
+			   <div class="ad-banner" id="b04">
+				   <ul>
+					   <li><img id="p1" src="" alt="" width="600" height="300" ></li>
+					   <li><img id="p2" src="" alt="" width="600" height="300" ></li>
+					   <li><img id="p3" src="" alt="" width="600" height="300" ></li>
+					   <li><img id="p4" src="" alt="" width="600" height="300" ></li>
+					   <li><img id="p5" src="" alt="" width="600" height="300" ></li>
+				   </ul>
+				   <a href="javascript:void(0);" class="unslider-arrow04 prev"><img class="arrow" id="al" src="images/arrowl1.png" alt="prev" width="20" height="35"></a>
+				   <a href="javascript:void(0);" class="unslider-arrow04 next"><img class="arrow" id="ar" src="images/arrowr1.png" alt="next" width="20" height="37"></a>
+			   </div>
+
+			   <script>
+                   $(document).ready(function(e) {
+                       var unslider04 = $('#b04').unslider({
+                               dots: true
+                           }),
+                           data04 = unslider04.data('unslider');
+
+                       $('.unslider-arrow04').click(function() {
+                           var fn = this.className.split(' ')[1];
+                           data04[fn]();
+                       });
+                   });
+			   </script>
+
+		      </div>
+
+			<div class="col-md-6 about-right wow bounceInRight" data-wow-delay="0.3s">
+           	 <h4>关于玩蛇的一些介绍</h4>
+           	 <p>玩蛇是一个区别于途牛等商业气息较重的网站，主题同样是旅游，我们致力于给我们的用户提供高质量的旅游产品与服务。玩蛇旅游营造了一种轻松悠闲的旅游氛围，让您进入我们网站的开始就已经进入度假的状态。我们网站还讲为您订制个性化服务。</p>
+             <div class="about-list">
+	             	<div class="ab-list-left">
+		               <ul>
+		               	<li><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"> </span>专业</li>
+		               	<li><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"> </span>高效</li>
+		               	<li><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"> </span>丰富</li>
+		               	<li><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"> </span>多样</li>
+		               </ul>
+	               </div>
+	               <div class="ab-list-right">
+		               <ul>
+		               	<li><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"> </span>服务贴心</li>
+		               	<li><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"> </span>功能全面</li>
+		               	<li><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"> </span>质量上乘</li>
+		               	<li><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"> </span>售后保障</li>
+		               </ul>
+		          </div>
+		        <div class="clearfix"> </div>
+              </div>
+           </div>
+          <div class="clearfix"> </div>
+		</div>
+	</div>
+</div>
+<div class="about-middle">
+	<div class="container">
+		      <div class="testimo">
+				 	   <h3>荣誉墙</h3>
+				 	   <span class="lft-bar-testi"> </span>
+				 	   <span class="rit-bar-testi"> </span>
+			  </div>
+		   <section class="slider">
+		 <div class="flexslider">
+			<ul class="slides">
+			  <li>
+			  	<div class="banner-bottom">			  		
+					<div class="about-midd-main">
+						<p>我们最高的荣誉是您对我们网站以及团队的好评！</p>
+					</div>
+			 	</div>
+			  </li>
+			  <li>
+			 	<div class="banner-bottom">				 	
+					<div class="about-midd-main">
+							<p>我们最高的荣誉是您对我们网站以及团队的好评！</p>
+					</div>
+			 	</div>
+			  </li>
+			  <li>
+			 	<div class="banner-bottom">			 	
+					<div class="about-midd-main">
+							<p>我们最高的荣誉是您对我们网站以及团队的好评！</p>
+					</div>
+			 	</div>
+			  </li>
+		    </ul>
+		 </div>
+		 <div class="clearfix"> </div>
+	  </section>
+	</div>
+</div>
+
+
+<!-- FlexSlider -->
+				  <script defer src="index/js/jquery.flexslider.js"></script>
+				  <script type="text/javascript">
+					$(window).load(function(){
+					  $('.flexslider').flexslider({
+						animation: "slide",
+						start: function(slider){
+						  $('body').removeClass('loading');
+						}
+					  });
+					});
+				  </script>
+			<!-- FlexSlider -->
+
+<div class="team">
+	<div class="container">
+		<div class="team-main">
+			<div class="team-head">
+				<h2>团队</h2>
+				<span class="lft-bar-memb"> </span>
+				<span class="rit-bar-memb"> </span>
+			</div>
+			<div class="col-md-4 team-grid wow bounceIn" data-wow-delay="0.4s">
+				<img src="images/t1.jpg" alt="" class="img-responsive">
+				<div class="team-bottom">
+					<p>董一臻，主要负责web端前台、后台部分页面以及创新功能实现。</p>
+					<a href="single.html"  class="hvr-bounce-out">More Info</a>
+				</div>
+				  <div class="info-top">
+				  	<h4>董一臻 </h4>
+				  	<p>Excepteur sint occaecat</p>
+				  </div>
+			</div>
+			<div class="col-md-4 team-grid wow bounceIn" data-wow-delay="0.4s">
+				<img src="images/t2.jpg" alt="" class="img-responsive">
+				<div class="team-bottom">
+					<p>苏泽阳，主要负责web端前台、后台部分页面以及后台图表绘制</p>
+					<a href="single.html"  class="hvr-bounce-out">More Info</a>
+				</div>
+				  <div class="info-top">
+				  	<h4>苏泽阳</h4>
+				  	<p>Excepteur sint occaecat</p>
+				  </div>
+			</div>
+			<div class="col-md-4 team-grid wow bounceIn" data-wow-delay="0.4s">
+				<img src="images/t1.jpg" alt="" class="img-responsive">
+				<div class="team-bottom">
+					<p>刘磊磊，主要负责安卓端的设计、实现,以及安卓端数据库的建立。</p>
+					<a href="single.html"  class="hvr-bounce-out">More Info</a>
+				</div>
+				  <div class="info-top">
+				  	<h4>刘磊磊</h4>
+				  	<p>Excepteur sint occaecat</p>
+				  </div>
+			</div>
+			<div class="col-md-4 team-grid wow bounceIn" data-wow-delay="0.4s">
+				<img src="images/t3.jpg" alt="" class="img-responsive">
+				<div class="team-bottom">
+					<p>王朋来，主要负责数据库基本操作以及各个页面设计、美化。</p>
+					<a href="single.html"  class="hvr-bounce-out">More Info</a>
+				</div>
+				  <div class="info-top">
+				  	<h4>王朋来</h4>
+				  	<p>Excepteur sint occaecat</p>
+				  </div>
+			</div>
+		   <div class="clearfix"> </div>
+		</div>
+	</div>
+</div>
+<!--about end here-->
+<!--footer start here-->
+<div class="map">
+	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d158858.182370726!2d-0.10159865000000001!3d51.52864165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2sLondon%2C+UK!5e0!3m2!1sen!2sin!4v1431577187804"> </iframe>
+  <div class="footer">
+	<div class="container">
+		<div class="footer-main">
+			<div class="col-md-4 ftr-grids wow bounceIn" data-wow-delay="0.4s">
+				<h4>Get in Touch</h4>
+				<ul class="get-touch">
+					<li><span class="share"> </span><a href="#">Tempor incididunt ut labore et dolore </a></li>
+					<li><span class="email"> </span><a href="mailto:info@example.com">example@gmail.com</a> </li>
+					<li><span class="phone"> </span>+613 1544 5578 </li>
+				</ul>
+			</div>
+			<div class="col-md-4 ftr-grids wow bounceIn" data-wow-delay="0.4s">
+				<h4>Follow Us</h4>
+				<ul class="mid-grid">
+					<li><a href="#"><span class="tw"> </span></a></li>
+					<li><a href="#"><span class="gmail"> </span></a> </li>
+					<li><a href="#"><span class="inst"> </span></a> </li>
+					<li><a href="#"><span class="pri"> </span></a> </li>					
+				</ul>
+			</div>
+			<div class="col-md-4 ftr-grids wow bounceIn" data-wow-delay="0.4s">
+				<h4>Popular Posts</h4>
+				<div class="ftr-last">
+				  <div class="ftr-month">
+				     <h6>January</h6>
+				  </div>
+				  <div class="ftr-like">
+				     <h6>3 likes</h6>
+				  </div>
+				  <div class="clearfix"> </div>
+				</div>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed</p>
+				<div class="ftr-last">
+				  <div class="ftr-month">
+				     <h6>February</h6>
+				  </div>
+				  <div class="ftr-like">
+				     <h6>5 likes</h6>
+				  </div>
+				  <div class="clearfix"> </div>
+				</div>
+				<p>Lorem ipsum dolor sit consectetur adipiscing eiusmod tempor</p>
+				<div class="ftr-last">
+				  <div class="ftr-month">
+				     <h6>March</h6>
+				  </div>
+				  <div class="ftr-like">
+				     <h6>2 likes</h6>
+				  </div>
+				  <div class="clearfix"> </div>
+				</div>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed</p>
+				<div class="ftr-last">
+				  <div class="ftr-month">
+				     <h6>April</h6>
+				  </div>
+				  <div class="ftr-like">
+				     <h6>7 likes</h6>
+				  </div>
+				  <div class="clearfix"> </div>
+				</div>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed</p>
+			</div>
+		   <div class="clearfix"> </div>
+		</div>		
+	</div>
+  </div>
+</div>
+
+</body>
+</html>

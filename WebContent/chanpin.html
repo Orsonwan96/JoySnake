@@ -1,0 +1,547 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reactive - Free HTML5 Template</title>
+    <meta name="description" content="" />
+    <meta name="author" content="templatemo">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="./favicon.png" />		
+    <!-- Bootstrap -->
+    <link href="product/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Camera -->
+    <link href="product/css/camera.css" rel="stylesheet">
+    <!-- Template  -->
+    <link href="product/css/templatemo_style.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]  -->
+    <script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+   
+   <script type="text/javascript">
+   $(document).ready(function (){
+	   function getUrlParam(name) {
+   		  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+   		  var r = window.location.search.substr(1).match(reg); //匹配目标参数
+   		  if (r != null) return unescape(r[2]); return null; //返回参数值
+   	}
+     	var pid = getUrlParam("pid");
+     	
+var uid= window.localStorage?localStorage.getItem("userid"):Cookie.read("userid");
+ 		
+$("#qinzibuy").click(function(){
+		var a = $("#family").text();
+		var cost = a.substr(6,a.length -1);
+	    var message = a.substr(0,2);
+    $.ajax({
+    	url:"ordert/addqinziorder.action",
+    	dataType:"text",
+    	data:{"uid":uid,
+    		  "pid":pid,
+    		  "cost":cost,
+    		  "message":message},
+        Type:"post",
+        success:function(data){
+        	if(data.indexOf("ok") != -1){
+        		alert("购买成功");
+        	}
+        	else{
+        		alert("账户余额不足");
+        	}
+        },
+        error:function(){
+        	alert("您尚未登录");
+        }
+    });
+	});
+	
+	$("#chengrenbuy").click(function(){
+		var a = $("#cost").text();
+		var cost = a.substr(5,a.length -1);
+	    var message = a.substr(0,2);
+	   $.ajax({
+   	url:"ordert/addqinziorder.action",
+   	dataType:"text",
+   	data:{"uid":uid,
+   		  "pid":pid,
+   		  "cost":cost,
+   		  "message":message},
+       Type:"post",
+       success:function(data){
+    	   if(data.indexOf("ok") != -1){
+       		alert("购买成功");
+       	}
+       	else{
+       		alert("账户余额不足");
+       	}
+       },
+       error:function(){
+       	alert("您尚未登录");
+       }
+   });
+	});
+	
+	$("#childbuy").click(function(){
+		var a = $("#childcost").text();
+		var cost = a.substr(5,a.length -1);
+	    var message = a.substr(0,2);
+	   $.ajax({
+   	url:"ordert/addqinziorder.action",
+   	dataType:"text",
+   	data:{"uid":uid,
+   		  "pid":pid,
+   		  "cost":cost,
+   		  "message":message},
+       Type:"post",
+       success:function(data){
+    	   if(data.indexOf("ok") != -1){
+          		alert("购买成功");
+          	}
+          	else{
+          		alert("账户余额不足");
+          	}
+       },
+       error:function(){
+       	alert("运行异常");
+       }
+   });
+	});
+
+     	
+     	//显示优惠信息和随机显示图片
+     	$.ajax({
+			url: "placet/SearchThreePhoto.action",    //请求的url地址，获取全部roles职务的名称
+		    dataType: "json",   //返回的异步数据格式为不能json，是文本格式
+		    data: {"pid":pid},//需要传递给servlet的uid主键值
+		    type: "post",   //请求方式，默认post	
+		   	 success:function(data) {	
+		   		 
+		   	 // alert(data.photo1);
+		   	  
+              $("#photo1").attr("src",data.photo1);
+              $("#photo2").attr("src",data.photo2);
+              $("#photo3").attr("src",data.photo3);
+              $("#photo4").attr("src",data.photo4);
+              
+              $("#img1").attr("src",data.photo1);
+              $("#img2").attr("src",data.photo3);
+              
+		    },		   
+		    error:function() {
+		        //请求出错处理
+		        alert("运行异常a");
+		    }
+		});
+     	
+     	$.ajax({
+			url: "placet/getDiscount.action",    //请求的url地址，获取全部roles职务的名称
+		    dataType: "json",   //返回的异步数据格式为不能json，是文本格式
+		    data: {"pid":pid},//需要传递给servlet的uid主键值
+		    type: "post",   //请求方式，默认post	
+		   	 success:function(data) {	
+		   		 
+		   	  //alert(data.photo4);
+		   	//  alert(data.dis1);
+              $("#discount1").text(data.dis1);
+              $("#discount2").text(data.dis2);
+              $("#discount3").text(data.dis3);
+              $("#discount4").text(data.dis4);
+		    },		   
+		    error:function() {
+		        //请求出错处理
+		        alert("运行异常a");
+		    }
+		});
+
+ //获取产品信息
+	 $.ajax({
+				url: "placet/placeEntity.action",    //请求的url地址，获取全部roles职务的名称
+			    dataType: "json",   //返回的异步数据格式为不能json，是文本格式
+			    data: {"pid":pid},//需要传递给servlet的uid主键值
+			    type: "post",   //请求方式，默认post	
+			   	 success:function(data) {		
+			   		
+					$("#title").text(data.title);
+					$(".pname").text(data.pname);				
+					$(".description").text(data.description);
+					$(".costSource").text(data.costSource);
+			   		$("#cost").text("成人花费："+data.cost);
+			   		$("#childcost").text("儿童花费："+data.childcost);	
+			   		var tot=data.cost+data.childcost;
+			   		$("#family").text("亲子总花费："+tot);		
+			   		$("#startDate").text("        行程开始时间："+data.startDate);//
+			   		$("#endDate").text("     行程结束时间："+data.endDate);
+			   	    $("#time").text("     推荐游玩天数："+data.time);//
+			   		$("#startPlace").text("出发城市："+data.startPlace);//
+			   		$("#position").text("目的地城市："+data.position);//
+			   		$("#satisfaction").text("游客满意度："+data.satisfaction);//
+			   		
+			    },		   
+			    error:function() {
+			        //请求出错处理
+			        alert("运行异常a");
+			    }
+			});
+ 
+	 
+	 
+	 
+ //累计售出，累计评价
+	 $.ajax({
+			url: "commentt/SearchCommentByPid.action",    //请求的url地址，获取全部roles职务的名称
+		    dataType: "json",   //返回的异步数据格式为不能json，是文本格式
+		    data: {"pid":pid},//需要传递给servlet的uid主键值
+		    type: "post",   //请求方式，默认post	
+		   	 success:function(data) {
+	           var value="";
+	           var count=0;
+	           
+		       $.each(data,function(i){
+			           value+="<tr><td>"+data[i].uname+"</td><td>"+data[i].ctext+"</td><td>"+data[i].isLike+"</td><td>"+data[i].ctime+"</td></tr>";	
+		               count++; 
+		       });
+		       $(".NumberOfComments").text(count);
+				$("#CommentTable").html(value);
+				},		   
+		    error:function() {
+		        //请求出错处理
+		        alert("运行异常a");
+		    }
+		}); 
+ 
+ 
+  
+   
+   });
+</script>
+
+  </head>
+<body>
+    <div class="col-xs-12 visible-sm visible-xs" id="templatemo_mobile_menu_wap">
+        <p id="mobile_menu_btn"> <a href="#"><span class="glyphicon glyphicon-align-justify"></span></a> </p>
+        <div id="mobile_menu">
+            <ul class="nav nav-pills nav-stacked">
+                <li><a href="#templatemo_banner_top">欢迎</a></li>
+                <li><a href="#templatemo_upcomming_event">活动</a></li>
+                <li><a href="#templatemo_pricing">定价</a></li>
+                <li><a href="#templatemo_blog">产品信息</a></li>
+                <li><a href="#templatemo_contact">联系</a></li>
+            </ul>
+        </div>
+    </div>
+  
+    <div id="templatemo_banner_top" class="container_wapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <p><a href="#">主页</a></p>
+                </div>
+                <div class="col-md-4">
+                    <p class="right"><a href="#">用户登录</a> <span class="glyphicon glyphicon-user"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="templatemo_banner_logo" class="container_wapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-md-offset-4">
+                    <h1 id="title">标题</h1><br /><br /><br />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="templatemo_banner_slide" class="container_wapper">
+        <div id="divv" class="camera_wrap camera_emboss" id="camera_slide">
+              <div data-src="product/images/banner_slide_02.jpg">
+                <div class="camera_caption fadeFromLeft camera_effected">
+                    <div class="container">
+                        <div class="col-md-6">
+                            <h1 class="pname">标题</h1>
+                            <p class="description">Description</p>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <div data-src="product/images/banner_slide_02.jpg">
+                <div class="camera_caption fadeFromLeft camera_effected">
+                    <div class="container">
+                        <div class="col-md-6">
+                            <h1 class="pname">标题</h1>
+                            <p class="description">Description</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-src="product/images/banner_slide_03.jpg">
+                <div class="camera_caption fadeFromLeft camera_effected">
+                    <div class="container">
+                        <div class="col-md-6">
+                            <h1 class="pname">标题</h1>
+                            <p class="description">Description</p>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div><!-- #camera_wrap_3 -->    
+    </div>
+    <div id="templatemo_main_menu" class="container_wapper hidden-sm hidden-xs">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="nav nav-justified">
+                        <li><a href="#templatemo_banner_top">欢迎</a></li>
+                        <li><a href="#templatemo_upcomming_event">活动</a></li>
+                        <li><a href="#templatemo_pricing">定价</a></li>
+                        <li><a href="#templatemo_blog">产品信息</a></li>
+                        <li><a href="#templatemo_contact">联系</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >网页模板</a></div>
+    <div id="templatemo_upcomming_event" class="container_wapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 section_header">
+                    <h1>活动</h1>
+                </div>
+                <div class="col-md-6 col-md-offset-3 col-md-offset-3">
+                    <p></p>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="event_box event_animate_left">
+                        <img id="photo1" style="height:223.54px; width:262.5px;" src="product/images/event_01.jpg"  alt="Event 1" class="img-responsive" />
+                        <ul>
+                            <li>
+                                    <span class="glyphicon glyphicon-calendar"></span>折扣信息：<br />
+                                    <span class="glyphicon">&nbsp;</span><span id="discount1"></span><br />
+                            </li>
+                            <li>
+                                    <span class="glyphicon glyphicon-time"></span>Time<br />
+                                    <span class="glyphicon">&nbsp;</span>国庆节特惠！<br />
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="event_box event_animate_left">
+                        <img id="photo2" style="height:223.54px; width:262.5px;" src="product/images/event_02.jpg" alt="Event 2" class="img-responsive" />
+                        <ul>
+                            <li>
+                                    <span class="glyphicon glyphicon-calendar"></span>折扣信息：<br />
+                                    <span class="glyphicon">&nbsp;</span><span id="discount2"></span><br />
+                            </li>
+                            <li>
+                                    <span class="glyphicon glyphicon-time"></span>Time<br />
+                                    <span class="glyphicon">&nbsp;</span>五一跳楼价！<br />
+                            </li>                         
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="event_box event_animate_right">
+                        <img id="photo3" style="height:223.54px; width:262.5px;" src="product/images/event_03.jpg" alt="Event 3" class="img-responsive" />
+                        <ul>
+                            <li>
+                                    <span class="glyphicon glyphicon-calendar"></span>折扣信息：<br />
+                                    <span class="glyphicon">&nbsp;</span><span id="discount3"></span><br />
+                            </li>
+                            <li>
+                                    <span class="glyphicon glyphicon-time"></span>Time<br />
+                                    <span class="glyphicon">&nbsp;</span>暑假大折扣！<br />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="event_box event_animate_right">
+                        <img id="photo4" style="height:223.54px; width:262.5px;" src="product/images/event_04.jpg" alt="Event 4" class="img-responsive" />
+                        <ul>
+                            <li>
+                                    <span class="glyphicon glyphicon-calendar"></span>折扣信息：<br />
+                                    <span class="glyphicon">&nbsp;</span><span id="discount4"></span><br />
+                            </li>
+                            <li>
+                                     <span class="glyphicon glyphicon-time"></span>Time<br />
+                                   <span class="glyphicon">&nbsp;</span>元旦随性游！<br />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="templatemo_clear">
+                    <div class="col-xs-6 event_animate_left" id="prev_event_btn">
+                            <p>
+                                <a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a>
+                            </p>
+                    </div>
+                    <div class="col-xs-6 event_animate_right" id="next_event_btn">
+                            <p>
+                                <a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a>
+                            </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="templatemo_pricing" class="container_wapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 section_header">
+                    <h1>费用介绍</h1>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-4 pricing_icon_wapper">
+                    <p class="cycle_icon"><span class="glyphicon glyphicon-heart"></span></p>
+                    <div class="clearfix"></div>
+                <!--     <h1>Silver</h1>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+                    -->
+                </div>
+                <div class="col-md-4 pricing_icon_wapper">
+                    <p class="cycle_icon"><span class="glyphicon glyphicon-phone"></span></p>
+                    <div class="clearfix"></div>
+                  <!--   <h1>Gold</h1>
+                    <p>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+                    -->
+                </div>
+                <div class="col-md-4 pricing_icon_wapper">
+                    <p class="cycle_icon"><span class="glyphicon glyphicon-pencil"></span></p>
+                    <div class="clearfix"></div>
+                 <!--   <h1>Platinum</h1>
+                    <p>Nulla a nulla odio. Fusce elit tellus, tempus nec ornare sit amet, placerat nec dolor. Integer justo lacus, dictum non lectus vel, aliquam tempor velit.</p>
+                    -->
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-4">
+                    <div class="price_table_box">
+                        <h1 id="cost">成人花费</h1>
+                        <ul>
+                            <li><span class="glyphicon glyphicon-pencil"></span>玩蛇旅游网为您特别提供的单次成人花费，包含所有游玩，住宿，饮食费用，为您提供力所能及的便利,使您有一个良好的出行体验！</li>
+             
+                            <li><span class="glyphicon glyphicon-folder-close"></span> <text class="costSource"></text></li>
+                        </ul>
+                        <div id="chengrenbuy" style = "cursor:pointer"><p><a><span class="glyphicon glyphicon-shopping-cart"></span> Buy</a></p></div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="price_table_box">
+                        <h1 id="childcost">儿童花费</h1>
+                        <ul>
+                            <li><span class="glyphicon glyphicon-pencil"></span> 玩蛇旅游网为您的孩子，家人提供儿童特惠套餐，包含儿童住宿、车票、游玩、饮食费用等一系列服务，为您带来优惠便捷的旅游环境！</li>
+                            
+                            <li><span class="glyphicon glyphicon-folder-close"></span> <text class="costSource"></text></li>
+                        </ul>
+                        <div id="childbuy" style = "cursor:pointer"><p><a><span class="glyphicon glyphicon-shopping-cart"></span> Buy</a></p></div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="price_table_box">
+                        <h1 id="family">亲子游</h1>
+                        <ul>
+                            <li><span class="glyphicon glyphicon-pencil"></span>玩蛇旅游网为您特别提供的亲自旅游，包含父母和孩子所有游玩，住宿，饮食费用，为您提供力所能及的便利,使您和您的孩子有一个好的游玩体验！</li>
+             
+                            <li><span class="glyphicon glyphicon-folder-close"></span> <text class="costSource"></text></li>
+                        </ul>
+                        <div id="qinzibuy" style = "cursor:pointer"><p><a><span class="glyphicon glyphicon-shopping-cart"></span> Buy</a></p></div>
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+    <div id="templatemo_blog" class="container_wapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 section_header">
+                    <h1>产品相关参数</h1>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-sm-4 event_animate_left">
+                    <img id="img1" src="./product/images/templatemo_blog_01.jpg" alt="Blog Post 1" class="img-responsive" />
+                </div>
+                <div class="col-sm-8 blog_text event_animate_right">
+                    <h1>游玩时间</h1>
+                   
+                       <h3 id="startDate">  </h3>
+                       <h3 id="endDate">  </h3>
+                       <h3 id="time">  </h3>
+      
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-sm-4 event_animate_left">
+                    <img id="img2" src="./product/images/templatemo_blog_02.jpg" alt="Blog Post 2" class="img-responsive" />
+                </div>
+                <div class="col-sm-8 blog_text event_animate_right">
+                    <h1>从哪里来，到哪里去</h1>
+                     <h3 id="startPlace">  </h3>
+                       <h3 id="position">  </h3>
+                       <h3 id="satisfaction">  </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="templatemo_contact" class="container_wapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 section_header">
+                    <h1>Contact</h1>
+                </div>
+                <div class="col-md-6 col-md-offset-3 col-md-offset-3">
+                    <p>Feel free to send us a message regarding this <a rel="nofollow" href="#">website template</a>. Pellentesque pulvinar, orci vel scelerisque suscipit, libero justo laoreet felis, ac consectetur est nisi quis ligula. Maecenas nec felis elit.</p>
+                </div>
+                <div id="templatemo_contact_map_wapper">
+                    <div id="templatemo_contact_map"></div>
+                </div>
+                <form action="#" method="post">
+                    <div class="col-md-4">
+                        <p>Your Name</p>
+                        <input type="text" name="name" id="name" placeholder="Full Name" />
+                    </div>
+                    <div class="col-md-4">
+                        <p>Your Email</p>
+                        <input type="text" name="email" id="email" placeholder="Your Email" />
+                    </div>
+                    <div class="col-md-4">
+                        <p>Subject</p>
+                        <input type="text" name="subject" id="subject" placeholder="Subject" />
+                    </div>
+                    <div class="col-xs-12">
+                        <p>Message</p>
+                        <textarea name="message" id="message" placeholder="Your message..." ></textarea>
+                    </div>
+                    <div class="col-md-4 col-xs-8">
+                        <button>Send Message</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="templatemo_footer" class="container_wapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <p>Copyright &copy; 2014.Company name All rights reserved.<a target="_blank" href="http://www.huiyi8.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+   <script src="product/js/jquery.min.js"></script>
+    <script src="product/js/bootstrap.min.js"></script>
+    <script src="product/js/jquery.easing.1.3.js"></script>
+    <script src="product/js/jquery.mobile.customized.min.js"></script>
+    <script src="product/js/camera.min.js"></script>
+    <script src="product/js/jquery.singlePageNav.min.js"></script>
+    <script src="product/js/templatemo_script.js"></script>
+
+</body>
+</html>

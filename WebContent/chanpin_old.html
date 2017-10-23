@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html >
+  <head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<meta name="keywords" content="首页" />
+<meta name="description" content="首页" />
+ <link rel="stylesheet" type="text/css" href="product/css/normalize.css"/>
+ <script type="text/javascript" src="product/js/jquery-1.9.1.min.js"></script>
+ <script src="product/js/common.js" type="text/javascript" charset="utf-8"></script>
+   <script type="text/javascript">
+   $(document).ready(function (){
+	   function getUrlParam(name) {
+   		  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+   		  var r = window.location.search.substr(1).match(reg); //匹配目标参数
+   		  if (r != null) return unescape(r[2]); return null; //返回参数值
+   	}
+     	var pid = getUrlParam("pid");
+
+ //获取产品信息
+	 $.ajax({
+				url: "placet/placeEntity.action",    //请求的url地址，获取全部roles职务的名称
+			    dataType: "json",   //返回的异步数据格式为不能json，是文本格式
+			    data: {"pid":pid},//需要传递给servlet的uid主键值
+			    type: "post",   //请求方式，默认post	
+			   	 success:function(data) {		
+			   		
+					$("#title").text(data.title);
+					$("#description").text(data.description);
+			   		$("#cost").text(data.cost);
+			   		$("#childcost").text(data.childcost);		   		
+			   		$("#startDate").text(data.startDate);//
+			   		$("#endDate").text(data.endDate);
+			   		$("#time").text(data.time);//
+			   		$("#startPlace").text(data.startPlace);//
+			   		$("#position").text(data.position);//
+			   		$("#satisfaction").text(data.satisfaction);//
+			   		
+			    },		   
+			    error:function() {
+			        //请求出错处理
+			        alert("运行异常a");
+			    }
+			});
+ //累计售出，累计评价
+	 $.ajax({
+			url: "commentt/SearchCommentByPid.action",    //请求的url地址，获取全部roles职务的名称
+		    dataType: "json",   //返回的异步数据格式为不能json，是文本格式
+		    data: {"pid":pid},//需要传递给servlet的uid主键值
+		    type: "post",   //请求方式，默认post	
+		   	 success:function(data) {
+	           var value="";
+	           var count=0;
+	           
+		       $.each(data,function(i){
+			           value+="<tr><td>"+data[i].uname+"</td><td>"+data[i].ctext+"</td><td>"+data[i].isLike+"</td><td>"+data[i].ctime+"</td></tr>";	
+		               count++; 
+		       });
+		       $(".NumberOfComments").text(count);
+				$("#CommentTable").html(value);
+				},		   
+		    error:function() {
+		        //请求出错处理
+		        alert("运行异常a");
+		    }
+		});
+ 
+ 
+  
+   
+   });
+   
+   
+</script>
+	  <style type="text/css">
+		  *{margin:0;padding:0;list-style-type:none;}
+		  body{background:url(im/bg.gif);}
+		  a,img{border:none;}
+
+		  .zx_slider{position:absolute;left:5px;top:35px;width:750px;height:350px;overflow:hidden;border-radius:5px;}
+		  .zx_slider .imgbox{width:3750px;height:310px;position:absolute;left:5px;top:4px;}
+		  .zx_slider .imgbox img{float:left;width:750px;height:310px;}
+		  .zx_slider .lbtn{cursor:pointer;width:45px;height:55px;position:absolute;left:0px;bottom:-3px;background:url(im/slider_l_btn.png);_background:none;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="im/slider_l_btn.png");}
+		  .zx_slider .rbtn{cursor:pointer;width:45px;height:55px;position:absolute;left:710px;bottom:-3px;background:url(im/slider_r_btn.png);_background:none;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="im/slider_r_btn.png");}
+		  .zx_slider .btnbox{width:750px;height:60px;position:absolute;left:30px;bottom:0px;}
+		  .zx_slider .btnbox a{cursor:pointer;display:inline-block;float:left;width:126px;height:54px;margin:0 0 0 10px;}
+		  .zx_slider .btnbox a img{position:relative;display:inline;width:120px;height:48px;float:left;border:3px solid #392101;border-radius:2px;}
+		  .zx_slider .btnbox a .img_hover{border:3px solid #e4471f;border-radius:2px;}
+
+		  .hi_btn{width:740px;height:330px;position:absolute;left:0px;top:0px;display:block;}
+	  </style>
+	  <link rel="stylesheet" href="product/css/kalendae.css" type="text/css" charset="utf-8">
+	  <script src="product/js/kalendae.standalone.js" type="text/javascript" charset="utf-8"></script>
+  </head>
+<body>
+
+<div class="showall">
+	     				<div class="zx_slider">
+
+		 <div class="imgbox">
+			 <img alt="Danx" src="im/danx1.jpg" width="750" height="310" />
+			 <img alt="Danx" src="im/danx2.jpg" width="750" height="310" />
+			 <img alt="Danx" src="im/danx3.jpg" width="750" height="310" />
+			 <img alt="Danx" src="im/danx4.jpg" width="750" height="310" />
+			 <img alt="Danx" src="im/danx5.jpg" width="750" height="310" />
+		 </div>
+
+		 <div class="png"></div>
+
+		 <a href="#" id="hi_btn0" class="hi_btn"></a>
+		 <a href="#" id="hi_btn1" class="hi_btn"></a>
+		 <a href="#" id="hi_btn2" class="hi_btn"></a>
+		 <a href="#" id="hi_btn3" class="hi_btn"></a>
+		 <a href="#" id="hi_btn4" class="hi_btn"></a>
+
+		 <div class="btnbox">
+			 <a onmouseover="btn_m_over(0)"><img alt="Danx" id="btn_img0" class="thumb img_hover" src="im/danx1.jpg" /></a>
+			 <a onmouseover="btn_m_over(1)"><img alt="Danx" id="btn_img1" class="thumb" src="im/danx2.jpg" /></a>
+			 <a onmouseover="btn_m_over(2)"><img alt="Danx" id="btn_img2" class="thumb" src="im/danx3.jpg" /></a>
+			 <a onmouseover="btn_m_over(3)"><img alt="Danx" id="btn_img3" class="thumb" src="im/danx4.jpg" /></a>
+			 <a onmouseover="btn_m_over(4)"><img alt="Danx" id="btn_img4" class="thumb" src="im/danx5.jpg" /></a>
+		 </div>
+
+		 <div class="lbtn"></div>
+		 <div class="rbtn"></div>
+
+
+	 </div><!--zx_slider end-->
+
+                        <div class="tb-property">
+                        	<div class="tr-nobdr">
+                        		<h3 id="title"> 标题</h3>
+								<p id="description">产品介绍</p>
+                        	</div>
+                        		<div class="txt">
+                        			<span class="nowprice">成人花费￥<a id="cost" href="">Cost</a></span>
+									<span class="nowprice">儿童花费￥<a id="childcost" href="">Child Cost</a></span>
+                        			<div class="cumulative">
+                        				<span class="number ty1">累计售出<br /><em id="add_sell_num_363">370</em></span>
+                        				<span class="number tyu">累计评价<br /><em class="NumberOfComments"id="add_sell_num_363">25</em></span>
+                        			</div>
+                        		</div>
+                        	<div class="txt-h">
+                        		<div id="StartDate">
+                                                    <label class="control-label col-md-4">出发时间</label>
+                                                    <p id="startDate"></p>
+                                </div>
+								<div id="StartDate">
+                                                    <label class="control-label col-md-4">返程时间</label>
+                                                    <p id="endDate"></p>
+                                </div>
+								<div id="Time">
+                                                    <label class="control-label col-md-4">游玩天数</label>
+                                                    <p id="time"></p>
+                                </div>
+								
+                        	</div>
+                        	<script>
+                        	$(document).ready(function(){
+                        	//����ı������
+                          	var t = $("#text_box");
+                        	//��ʼ������Ϊ1,��ʧЧ��
+                        	$('#min').attr('disabled',true);
+                            	//�������Ӳ���
+                            	$("#add").click(function(){
+                               	 t.val(parseInt(t.val())+1)
+                               	 if (parseInt(t.val())!=1){
+                                   	 $('#min').attr('disabled',false);
+                                	}
+
+                           	 })
+                            	//�������ٲ���
+                            	$("#min").click(function(){
+                                	t.val(parseInt(t.val())-1);
+                                	if (parseInt(t.val())==1){
+                                   	 $('#min').attr('disabled',true);
+                                	}
+
+                            	})
+                        	});
+                        	</script>
+                        	<div class="gcIpt">
+                        		<div id="StartPlace">
+                                                    <label class="control-label col-md-4">出发城市</label>
+                                                    <p id="startPlace"></p>
+                                </div>
+								<div id="Position">
+                                                    <label class="control-label col-md-4">地点</label>
+                                                    <p id="position"></p>
+                                </div>
+								<div id="Satisfaction">
+                                                    <label class="control-label col-md-4">满意度</label>
+                                                    <p id="satisfaction"></p>
+                                </div>
+                        	</div>
+                        	<div class="nobdr-btns">
+                        		
+                        		<button class="addcart yh"><img src="im/ht.png" width="25" height="25"/>立即预定</button>
+                        	</div>
+                        	<div class="guarantee">
+                        		<span>行程概要： D1广州>东京>D2东京>D3东京>箱根>富士山温泉酒店>D4富士山>名古屋>中部地区>D5中部地区>京都>大阪>D6关西机场>广州</span>
+                        	</div>
+                        </div>
+
+	<div class="auto-kal" data-kal="months: 3, direction: 'future'"></div>
+
+
+ <script type="text/javascript">
+     var slider_count=4;
+     $(".slider_p_div").hide();
+     $("#slider_p0").show();
+     $(".hi_btn").hide();
+     $("#hi_btn0").show();
+     $(".img_hover").animate({bottom:'10px'});
+     var slider_i=1;
+     var m_over=true;
+
+     function zx_slider(){
+         if(m_over){
+             if(slider_i<0){slider_i=slider_count;}
+             //p
+             $(".slider_p_div").hide();
+             $("#slider_p"+slider_i).show();
+             //p end
+             //hi_btn
+             $(".hi_btn").hide();
+             $("#hi_btn"+slider_i).show();
+             //hi_btn end
+             //btn
+             $(".btnbox img").stop(true,true);
+             $(".btnbox img").removeClass("img_hover");
+             $(".btnbox img").animate({bottom:'0px'},200);
+             $("#btn_img"+slider_i).addClass("img_hover");
+             $("#btn_img"+slider_i).animate({bottom:'10px'},200);
+             //btn end
+             $(".imgbox").stop();
+             $(".imgbox").animate({left:'-750'*slider_i+'px'});
+             if(slider_i<slider_count){
+                 slider_i++;
+             }else{
+                 slider_i=0;
+             }
+         }
+     }
+
+     $(".lbtn").click(function(){
+         m_over=true;
+         if(slider_i==0){slider_i=slider_count-1}else{slider_i=slider_i-2;}
+         zx_slider();
+         m_over=false;
+     });
+
+     $(".rbtn").click(function(){
+         m_over=true;
+         zx_slider();
+         m_over=false;
+     });
+
+     function btn_m_over(btn_i){
+         if(slider_i-1!=btn_i){
+             m_over=true;
+             slider_i=btn_i;
+             zx_slider();
+             m_over=false;
+         }
+     }
+
+     zx_timer=setInterval("zx_slider();",5000);
+     $(".zx_slider").mouseover(function(){
+         m_over=false;
+     });
+     $(".zx_slider").mouseout(function(){
+         m_over=true;
+     });
+ </script>
+
+ <div style="text-align:center;clear:both">
+	 <script src="/gg_bd_ad_720x90.js" type="text/javascript"></script>
+	 <script src="/follow.js" type="text/javascript"></script>
+ </div>
+
+                
+<!-- 商品介紹 -->                
+                <div class="gdetail">
+
+                	<!-- right -->
+                	<script>
+                	var detail = document.querySelector('.detail');
+var origOffsetY = detail.offsetTop;
+function onScroll(e) {
+window.scrollY >= origOffsetY ? detail.classList.add('sticky') :
+detail.classList.remove('sticky');
+}
+document.addEventListener('scroll', onScroll); 
+</script>
+                	<div class="detail">
+                		<div class="active_tab" id="outer">
+													<ul class="act_title_left" id="tab">
+														<li class="act_active">
+															<a href="#">景点信息</a>
+														</li>
+														<li>
+															<a href="#">游客评价</a>
+														</li>
+														<li>
+															<a href="#">联系客服</a>
+														</li>
+														<li>
+															<a href="#">待定</a>
+														</li>
+													</ul>
+
+													<div class="clear"></div>
+												</div>
+												<div id="content" class="active_list"> 
+													<!--0-->
+													<div id="ui-a" class="ui-a">
+												        <ul style="display:block;">
+												        <li>商品名称：仙人指路道镜前后双录智能后视镜导航仪行车记录仪后视预警一体机</li>
+												        <li>商品编号：ECS001983</li>
+												        <li>品牌</li>
+												        <li>上架时间：2016-05-24</li>
+												        <li>商品毛重：0克</li>
+												        <li>库存： 999 </li>
+												        <li><img src="im/ko-1.jpg"/></li>
+												        <li><img src="im/ko-2.jpg"/></li>
+												        <li><img src="im/ko.jpg"/></li>
+												        <li><img src="im/ko-1.jpg"/></li>
+												        </ul>
+												   </div>
+												   <!--商品规格-->
+												    	<div id="bit" class="bit">
+												        <table id="CommentTable">
+												           
+												                
+												       </table>
+												       </div>
+												       
+												 <!--商品评价-->      
+												   
+												    <div id="ui-c" class="ui-c">
+												         <ul style="display:none;">
+												         	
+												         </ul>
+												    </div>
+												 <!--售后保障-->
+												 <div id="uic" class="uic">
+												         <ul style="display:none;">
+												         	<p>商品名称：仙人指路道镜前后双录智能后视镜导航仪行车记录仪后视预警一体机</p>
+												         	<p>商品编号：ECS001983</p>
+												         	<p>品牌:威力马哈国产</p>
+												         	<p>上架时间：2016-05-24</p>
+												         	<span><img src="im/ko-1.jpg"/></span>
+												            <span><img src="im/ko-2.jpg"/></span>
+												         </ul>
+												    </div>
+												</div>
+												<script>
+													$(function(){
+														window.onload = function()
+														{
+															var $li = $('#tab li');
+															var $ul = $('#content ul');
+																		
+															$li.mouseover(function(){
+																var $this = $(this);
+																var $t = $this.index();
+																$li.removeClass();
+																$this.addClass('act_active');
+																$ul.css('display','none');
+																$ul.eq($t).css('display','block');
+															})
+														}
+													});  
+												</script>
+                	</div>
+                </div>
+</div>
+</body>
+</html>
